@@ -30,6 +30,7 @@
         "@elementium/eslint-config-typescript": "file:../elementium/packages/eslint-config-typescript",
         "@elementium/tsconfig": "file:../elementium/packages/tsconfig/",
         "@react-native/metro-config": "^0.72.11",
+        "@sayem314/react-native-keep-awake": "^1.2.2",
         "@types/react": "^18.0.24",
         "@typescript-eslint/eslint-plugin": "^6.11.0",
         "@typescript-eslint/parser": "^6.11.0",
