@@ -729,6 +729,9 @@
     deepmerge "^3.2.0"
     hoist-non-react-statics "^3.3.0"
 
+"@elementium/color@file:../elementium/packages/color":
+  version "1.0.3"
+
 "@elementium/eslint-config-typescript@file:../elementium/packages/eslint-config-typescript":
   version "1.0.0"
 
