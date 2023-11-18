@@ -1,0 +1,32 @@
+{
+    "name": "clima",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "lint": "eslint .",
+        "typecheck": "tsc --noEmit",
+        "start": "react-native start",
+        "android": "react-native run-android",
+        "ios": "react-native run-ios"
+    },
+    "dependencies": {
+        "react": "18.2.0",
+        "react-native": "0.72.7"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.20.0",
+        "@elementium/eslint-config": "file:../elementium/packages/eslint-config",
+        "@elementium/eslint-config-typescript": "file:../elementium/packages/eslint-config-typescript",
+        "@elementium/tsconfig": "file:../elementium/packages/tsconfig/",
+        "@react-native/metro-config": "^0.72.11",
+        "@types/react": "^18.0.24",
+        "@typescript-eslint/eslint-plugin": "^6.11.0",
+        "@typescript-eslint/parser": "^6.11.0",
+        "eslint": "^8.19.0",
+        "metro-react-native-babel-preset": "0.76.8",
+        "typescript": "4.8.4"
+    },
+    "engines": {
+        "node": ">=16"
+    }
+}
