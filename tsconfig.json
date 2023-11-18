@@ -8,6 +8,7 @@
             "@router": ["./src/router"],
             "@screens/*": ["./src/screens/*"],
             "@services/*": ["./src/services/*"],
-        }
+        },
+        "typeRoots": ["./src/types"],
     }
 }
