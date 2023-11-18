@@ -1,3 +1,13 @@
 {
     "extends": "@elementium/tsconfig",
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@api": ["./src/api"],
+            "@components": ["./src/components"],
+            "@router": ["./src/router"],
+            "@screens/*": ["./src/screens/*"],
+            "@services/*": ["./src/services/*"],
+        }
+    }
 }
