@@ -1,6 +1,7 @@
 import axios from "axios"
 
 import { OPEN_WEATHER_MAP_API_KEY } from "@env"
+import { getDeviceLanguageCode } from "@locale"
 
 
 export const openWeatherMap = axios.create({
@@ -9,5 +10,6 @@ export const openWeatherMap = axios.create({
         appid: OPEN_WEATHER_MAP_API_KEY,
         limit: 1,
         units: "metric",
+        lang: getDeviceLanguageCode(),
     },
 })
