@@ -86,7 +86,7 @@ export function Home() {
     async function getLocationBySearch() {
         if (cityName === undefined || cityName.length === 0) {
             Alert.alert(
-                "Não foi possível obter a sua localização",
+                "Não foi possível pesquisar localização",
                 "O nome da cidade não pode ser vazio."
             )
             return
