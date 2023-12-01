@@ -7,6 +7,7 @@ import { Icon, useTheme } from "react-native-paper"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { GeocodingResponse, OPEN_WEATHER_MAP, openWeatherMap } from "@api"
+import { translate } from "@locale"
 import { Geolocation } from "@services/geolocation"
 import { Permissions } from "@services/permissions"
 import { STORAGE_KEYS, SearchCity } from "@services/storage"
@@ -85,8 +86,8 @@ export function LocationInput(props: LocationInputProps) {
         const hasLocationPermission = await Permissions.requestFineLocation()
         if (!hasLocationPermission) {
             Alert.alert(
-                "Não foi possível obter a sua localização",
-                "O uso do GPS é necessário para o funcionamento do aplicativo e sua permissão não foi concedida."
+                translate("LocationInput_noLocationPermission_title"),
+                translate("LocationInput_noLocationPermission_message")
             )
             return
         }
@@ -95,8 +96,8 @@ export function LocationInput(props: LocationInputProps) {
             return await Geolocation.getCurrentPosition()
         } catch (error) {
             Alert.alert(
-                "Não foi possível obter a sua localização",
-                "Houve um erro ao obter a localização atual do GPS."
+                translate("LocationInput_errorGettingLocation_title"),
+                translate("LocationInput_errorGettingLocation_message")
             )
         }
         return
@@ -113,8 +114,8 @@ export function LocationInput(props: LocationInputProps) {
             const data = response.data as GeocodingResponse[]
             if (data.length === 0) {
                 Alert.alert(
-                    "Não foi possível obter a sua localização",
-                    "Não foi possível obter a sua cidade com base na localização do GPS"
+                    translate("LocationInput_couldNotGetAddressFromCoordinates_title"),
+                    translate("LocationInput_couldNotGetAddressFromCoordinates_message")
                 )
                 return
             }
@@ -122,8 +123,8 @@ export function LocationInput(props: LocationInputProps) {
             return data[0]
         } catch (error) {
             Alert.alert(
-                "Não foi possível obter a sua localização",
-                "Houve um erro ao obter a sua cidade com base na localização do GPS."
+                translate("LocationInput_errorGettingAddressFromCoordinates_title"),
+                translate("LocationInput_errorGettingAddressFromCoordinates_message")
             )
             return
         }
@@ -133,8 +134,8 @@ export function LocationInput(props: LocationInputProps) {
     async function getLocationBySearch() {
         if (text === undefined || text.length === 0) {
             Alert.alert(
-                "Não foi possível pesquisar localização",
-                "O nome da cidade não pode ser vazio."
+                translate("LocationInput_cityNameMustNotBeEmpty_title"),
+                translate("LocationInput_cityNameMustNotBeEmpty_message")
             )
             return
         }
@@ -158,8 +159,8 @@ export function LocationInput(props: LocationInputProps) {
             const data = response.data as GeocodingResponse[]
             if (data.length === 0) {
                 Alert.alert(
-                    "Não foi possível obter a sua localização",
-                    "Não foi possível obter suas coordenadas com base na cidade fornecida."
+                    translate("LocationInput_couldNotGetLocationCoordinatesFromAddress_title"),
+                    translate("LocationInput_couldNotGetLocationCoordinatesFromAddress_message")
                 )
                 return
             }
@@ -167,8 +168,8 @@ export function LocationInput(props: LocationInputProps) {
             return data[0]
         } catch (error) {
             Alert.alert(
-                "Não foi possível obter a sua localização",
-                "Houve um erro ao obter suas coordenadas com base no nome da cidade fornecida."
+                translate("LocationInput_errorGettingLocationCoordinatesFromAddress_title"),
+                translate("LocationInput_errorGettingLocationCoordinatesFromAddress_message")
             )
             return
         }
@@ -182,7 +183,7 @@ export function LocationInput(props: LocationInputProps) {
                 value={text}
                 onChangeText={setText}
                 selectTextOnFocus={true}
-                placeholder={"Pesquisar cidade"}
+                placeholder={translate("LocationInput_placeholder")}
                 selectionColor={colors.primaryContainer}
                 cursorColor={colors.primary}
                 placeholderTextColor={colors.onSurfaceVariant}

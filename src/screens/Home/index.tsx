@@ -3,6 +3,7 @@ import { Alert, View } from "react-native"
 import { useMMKV, useMMKVObject } from "react-native-mmkv"
 
 import { CurrentWeatherResponse, OPEN_WEATHER_MAP, openWeatherMap } from "@api"
+import { translate } from "@locale"
 import { CurrentWeatherData, STORAGE_KEYS, SearchCity } from "@services/storage"
 import { LocationInput } from "./LocationInput"
 import { styles } from "./styles"
@@ -40,8 +41,8 @@ export function Home() {
             })
         } catch (error) {
             Alert.alert(
-                "Não foi possível obter os dados do clima",
-                "Houve um erro ao obter os dados mais atuais do clima. Verifique sua conexão com a Internet ou tente novamente mais tarde."
+                translate("Home_errorGettingCurrentWeatherData_title"),
+                translate("Home_errorGettingCurrentWeatherData_message")
             )
         }
     }
