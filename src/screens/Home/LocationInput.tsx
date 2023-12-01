@@ -1,5 +1,5 @@
 import { Color, Prism } from "@elementium/color"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { Alert, Pressable, PressableAndroidRippleConfig, StyleProp, StyleSheet, TextInput, TextStyle, View, ViewStyle } from "react-native"
 import { GeoPosition } from "react-native-geolocation-service"
 import { useMMKVObject } from "react-native-mmkv"
@@ -7,6 +7,7 @@ import { Icon, useTheme } from "react-native-paper"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { GeocodingResponse, OPEN_WEATHER_MAP, openWeatherMap } from "@api"
+import { useBlurInputOnKeyboardDismiss } from "@hooks"
 import { translate } from "@locale"
 import { Geolocation } from "@services/geolocation"
 import { Permissions } from "@services/permissions"
@@ -24,6 +25,7 @@ export function LocationInput(props: LocationInputProps) {
     const safeAreaInsets = useSafeAreaInsets()
     const { colors, fonts } = useTheme()
 
+    const locationInputRef = useRef<TextInput>(null)
     const [text, setText] = useState("")
     const hasText = text !== undefined && text.length > 0
     const [citySearch, setCitySearch] = useMMKVObject<SearchCity>(STORAGE_KEYS.SEARCH_CITY)
@@ -48,6 +50,9 @@ export function LocationInput(props: LocationInputProps) {
     const buttonOverlay = new Color("white").setA(0.2)
     const buttonRipple = Prism.addColors(buttonBackgroundColor, buttonOverlay).toRgba()
     const ripple: PressableAndroidRippleConfig = { color: buttonRipple, radius: 28 }
+
+
+    useBlurInputOnKeyboardDismiss([locationInputRef])
 
 
     function GetLocationButton() {
@@ -179,6 +184,7 @@ export function LocationInput(props: LocationInputProps) {
     return (
         <View style={wrapperStyle}>
             <TextInput
+                ref={locationInputRef}
                 defaultValue={citySearch?.city}
                 value={text}
                 onChangeText={setText}
