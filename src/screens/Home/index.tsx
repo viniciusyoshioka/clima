@@ -31,6 +31,7 @@ export function Home() {
         const { latitude, longitude } = coords
         const city = locationAddress.name
 
+        setCityName(city)
         setCitySearch({ city, latitude, longitude, timestamp })
     }
 
