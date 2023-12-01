@@ -181,6 +181,7 @@ export function Home() {
                 defaultValue={citySearch?.city}
                 value={cityName}
                 onChangeText={setCityName}
+                onSubmitEditing={getLocationBySearch}
                 getLocation={getLocationByGps}
                 searchLocation={getLocationBySearch}
             />
