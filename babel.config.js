@@ -13,6 +13,7 @@ module.exports = {
                 "@api": "./src/api",
                 "@components": "./src/components",
                 "@hooks": "./src/hooks",
+                "@locale": "./src/locale",
                 "@router": "./src/router",
                 "@screens": "./src/screens",
                 "@services": "./src/services",
