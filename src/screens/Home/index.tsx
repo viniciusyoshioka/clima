@@ -13,6 +13,7 @@ export function Home() {
 
 
     const mmkv = useMMKV()
+    const [citySearch, setCitySearch] = useMMKVObject<SearchCity>(STORAGE_KEYS.SEARCH_CITY)
     const [currentWeather, setCurrentWeather] = useMMKVObject<CurrentWeatherData>(STORAGE_KEYS.CURRENT_WEATHER)
 
 
@@ -47,6 +48,19 @@ export function Home() {
         }
     }
 
+
+    useEffect(() => {
+        if (!citySearch) return
+
+        const lastSearch = citySearch.timestamp
+        const now = Date.now()
+        const differenceInMs = now - lastSearch
+        const differenceInMin = differenceInMs / 1000 / 60
+        if (differenceInMin > 1) {
+            setCitySearch({ ...citySearch, timestamp: now })
+            getWeatherData(citySearch)
+        }
+    }, [])
 
     useEffect(() => {
         const listener = mmkv.addOnValueChangedListener(async key => {
