@@ -220,6 +220,7 @@ const styles = StyleSheet.create({
         gap: 8,
         paddingLeft: 16,
         borderRadius: 100,
+        zIndex: 10,
     },
     input: {
         flex: 1,
