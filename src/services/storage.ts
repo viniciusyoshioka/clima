@@ -13,13 +13,15 @@ export interface SearchCity {
 }
 
 
+type WeatherDescription = {
+    id: number
+    main: string
+    description: string
+    icon: string
+}
+
 export interface CurrentWeatherData {
-    weather: {
-        id: number
-        main: string
-        description: string
-        icon: string
-    }
+    weather: WeatherDescription[]
 
     currentTemperature: number
     perceivedTemperature: number
