@@ -1,12 +1,12 @@
 import { useEffect } from "react"
-import { Alert, View } from "react-native"
+import { Alert } from "react-native"
 import { useMMKV, useMMKVObject } from "react-native-mmkv"
 
 import { CurrentWeatherResponse, OPEN_WEATHER_MAP, openWeatherMap } from "@api"
 import { translate } from "@locale"
 import { CurrentWeatherData, STORAGE_KEYS, SearchCity } from "@services/storage"
 import { LocationInput } from "./LocationInput"
-import { styles } from "./styles"
+import { WeatherData } from "./WeatherData"
 
 
 export function Home() {
@@ -63,9 +63,9 @@ export function Home() {
     }, [])
 
 
-    return (
-        <View style={styles.container}>
-            <LocationInput />
-        </View>
-    )
+    return <>
+        <LocationInput />
+
+        <WeatherData />
+    </>
 }
