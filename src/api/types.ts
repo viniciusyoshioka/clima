@@ -37,12 +37,12 @@ export interface CurrentWeatherResponse {
         lon: number
         lat: number
     }
-    weather: {
+    weather: Array<{
         id: number
         main: string
         description: string
         icon: string
-    }
+    }>
     base: string
     main: {
         temp: number
