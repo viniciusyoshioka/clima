@@ -21,6 +21,19 @@ export function CurrentTemperature() {
         return `${temperatureString}°`
     }
 
+    function getDateTime() {
+        if (!citySearch) return
+
+        const lastSearchDate = new Date(citySearch.timestamp)
+        const date = lastSearchDate.toLocaleDateString()
+        const time = lastSearchDate.toLocaleTimeString("default", {
+            hour: "2-digit",
+            minute: "2-digit",
+        })
+
+        return `${date} ${time}`
+    }
+
     function getMinMaxTemperature() {
         const minTemperature = currentWeather?.temperatureMin
         const maxTemperature = currentWeather?.temperatureMax
@@ -62,7 +75,7 @@ export function CurrentTemperature() {
 
             <View>
                 <Text variant={"titleMedium"}>
-                    {citySearch?.city}
+                    {citySearch?.city} &bull; {getDateTime()}
                 </Text>
 
                 <View style={styles.temperaturesContainer}>
