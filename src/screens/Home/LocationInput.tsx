@@ -26,9 +26,9 @@ export function LocationInput(props: LocationInputProps) {
     const { colors, fonts } = useTheme()
 
     const locationInputRef = useRef<TextInput>(null)
-    const [text, setText] = useState("")
-    const hasText = text !== undefined && text.length > 0
     const [citySearch, setCitySearch] = useMMKVObject<SearchCity>(STORAGE_KEYS.SEARCH_CITY)
+    const [text, setText] = useState(citySearch?.city ?? "")
+    const hasText = text !== undefined && text.length > 0
 
 
     const flattenWrapperStyle = StyleSheet.flatten(props.wrapperStyle)
@@ -185,7 +185,6 @@ export function LocationInput(props: LocationInputProps) {
         <View style={wrapperStyle}>
             <TextInput
                 ref={locationInputRef}
-                defaultValue={citySearch?.city}
                 value={text}
                 onChangeText={setText}
                 selectTextOnFocus={true}
