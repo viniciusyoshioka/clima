@@ -23,7 +23,7 @@ export function Router() {
         statusBarStyle: isDark ? "light" : "dark",
         statusBarTranslucent: true,
         contentStyle: {
-            backgroundColor: colors.background,
+            backgroundColor: isDark ? "black" : "white",
         },
     }
 
