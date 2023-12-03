@@ -5,6 +5,12 @@ import { TranslationObjectType } from "./types"
 export const pt_br: TranslationObjectType = {
     ok: "Ok",
 
+    // CurrentConditions
+    CurrentConditions_humidity: "Humidade",
+    CurrentConditions_wind: "Vento",
+    CurrentConditions_sunrise: "Nascer do Sol",
+    CurrentConditions_sunset: "Por do Sol",
+
     // Home
     Home_errorGettingCurrentWeatherData_title: "Não foi possível obter os dados do clima",
     Home_errorGettingCurrentWeatherData_message: "Houve um erro ao obter os dados mais atuais do clima. Verifique sua conexão com a Internet ou tente novamente mais tarde.",

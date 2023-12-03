@@ -2,6 +2,12 @@
 export type TranslationKeyType =
     | "ok"
 
+    // CurrentConditions
+    | "CurrentConditions_humidity"
+    | "CurrentConditions_wind"
+    | "CurrentConditions_sunrise"
+    | "CurrentConditions_sunset"
+
     // Home
     | "Home_errorGettingCurrentWeatherData_title"
     | "Home_errorGettingCurrentWeatherData_message"

@@ -1,7 +1,7 @@
 import { ScrollView, StatusBar, StyleSheet, ViewStyle } from "react-native"
 import { useMMKVObject } from "react-native-mmkv"
 
-import { CurrentTemperature } from "@components"
+import { CurrentConditions, CurrentTemperature } from "@components"
 import { STORAGE_KEYS, SearchCity } from "@services/storage"
 
 
@@ -27,6 +27,8 @@ export function WeatherData() {
             contentContainerStyle={contentContainerStyle}
         >
             <CurrentTemperature />
+
+            <CurrentConditions />
         </ScrollView>
     )
 }
@@ -39,5 +41,6 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         padding: 16,
+        gap: 16,
     },
 })
