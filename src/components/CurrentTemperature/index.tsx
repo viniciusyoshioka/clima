@@ -67,7 +67,7 @@ export function CurrentTemperature() {
                 </View>
 
                 <Image source={{
-                    uri: `https://openweathermap.org/img/wn/${currentWeather?.weather[0].icon}@2x.png`,
+                    uri: `https://openweathermap.org/img/wn/${currentWeather?.weather[0].icon}@4x.png`,
                     width: 100,
                     height: 100,
                 }} />
