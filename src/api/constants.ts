@@ -5,5 +5,6 @@ export const OPEN_WEATHER_MAP = {
         currentWeather: "/data/2.5/weather",
         geocoding: "/geo/1.0/direct",
         reverseGeocoding: "/geo/1.0/reverse",
+        forecast: "/data/2.5/forecast",
     },
 }
