@@ -17,7 +17,7 @@ export function CurrentTemperature() {
         const temperature = currentWeather?.currentTemperature
         if (!temperature) return
 
-        const temperatureString = temperature.toString().replace(".", ",")
+        const temperatureString = temperature.toFixed(0)
         return `${temperatureString}°`
     }
 
@@ -39,8 +39,8 @@ export function CurrentTemperature() {
         const maxTemperature = currentWeather?.temperatureMax
         if (!minTemperature || !maxTemperature) return
 
-        const minTemperatureString = minTemperature.toString().replace(".", ",")
-        const maxTemperatureString = maxTemperature.toString().replace(".", ",")
+        const minTemperatureString = minTemperature.toFixed()
+        const maxTemperatureString = maxTemperature.toFixed()
         return `${minTemperatureString}° / ${maxTemperatureString}°`
     }
 
@@ -48,7 +48,7 @@ export function CurrentTemperature() {
         const perceivedTemperature = currentWeather?.perceivedTemperature
         if (!perceivedTemperature) return
 
-        const perceivedTemperatureString = perceivedTemperature.toString().replace(".", ",")
+        const perceivedTemperatureString = perceivedTemperature.toFixed()
         return `${perceivedTemperatureString}°`
     }
 
