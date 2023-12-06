@@ -1,7 +1,10 @@
+import { ForecastResponse } from "@api"
+
 
 export enum STORAGE_KEYS {
     SEARCH_CITY = "search_city",
     CURRENT_WEATHER = "current_weather",
+    FORECAST_WEATHER = "forecast_weather",
 }
 
 
@@ -35,3 +38,6 @@ export interface CurrentWeatherData {
 
     windSpeed: number
 }
+
+
+export type ForecastWeatherData = ForecastResponse["list"]

@@ -7,10 +7,14 @@ export type TranslationKeyType =
     | "CurrentConditions_wind"
     | "CurrentConditions_sunrise"
     | "CurrentConditions_sunset"
+    // TodayForecast
+    | "TodayForecast_noTodayForecastAvailable"
 
     // Home
     | "Home_errorGettingCurrentWeatherData_title"
     | "Home_errorGettingCurrentWeatherData_message"
+    | "Home_errorGettingForecastWeatherData_title"
+    | "Home_errorGettingForecastWeatherData_message"
     // LocationInput
     | "LocationInput_noLocationPermission_title"
     | "LocationInput_noLocationPermission_message"

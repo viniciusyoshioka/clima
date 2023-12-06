@@ -10,10 +10,14 @@ export const pt_br: TranslationObjectType = {
     CurrentConditions_wind: "Vento",
     CurrentConditions_sunrise: "Nascer do Sol",
     CurrentConditions_sunset: "Por do Sol",
+    // TodayForecast
+    TodayForecast_noTodayForecastAvailable: "Previsão do tempo não disponível para hoje",
 
     // Home
     Home_errorGettingCurrentWeatherData_title: "Não foi possível obter os dados do clima",
     Home_errorGettingCurrentWeatherData_message: "Houve um erro ao obter os dados mais atuais do clima. Verifique sua conexão com a Internet ou tente novamente mais tarde.",
+    Home_errorGettingForecastWeatherData_title: "Não foi possível obter os dados do clima",
+    Home_errorGettingForecastWeatherData_message: "Houve um erro ao obter os dados mais atuais da previsão do tempo para hoje. Verifique sua conexão com a Internet ou tente novamente mais tarde.",
     // LocationInput
     LocationInput_noLocationPermission_title: "Não foi possível obter a sua localização",
     LocationInput_noLocationPermission_message: "O uso do GPS é necessário para o funcionamento do aplicativo e sua permissão não foi concedida.",
