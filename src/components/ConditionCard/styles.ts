@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
         borderRadius: 16,
         padding: 16,
         gap: 8,
+        overflow: "hidden",
     },
     divider: {
         width: "100%",
