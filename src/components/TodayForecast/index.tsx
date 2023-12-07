@@ -12,7 +12,14 @@ import { ForecastWeatherData, STORAGE_KEYS, SearchCity } from "@services/storage
 import { styles } from "./styles"
 
 
-export function TodayForecast() {
+export interface TodayForecastProps {
+    baseTimestmap?: number
+    showForecastAfterTimestamps?: number
+    showForecastBeforeTimestamps?: number
+}
+
+
+export function TodayForecast(props: TodayForecastProps) {
 
 
     const { colors } = useTheme()
@@ -24,21 +31,54 @@ export function TodayForecast() {
     const todayForecastWeather = useMemo(() => {
         if (!forecastWeather) return []
 
-        const tomorrow = new Date()
-        tomorrow.setDate(tomorrow.getDate() + 1)
-        tomorrow.setHours(0, 0, 0, 0)
-        const tomorrowTimestamp = tomorrow.getTime()
+        const firstTimestamp = getFirstTimestamp()
+        const lastTimestamp = getLastTimestamp()
+        const baseTimestmap = getBaseTimestamp()
 
         return forecastWeather.filter(forecast => {
             const forecastTimestamp = forecast.dt * 1000
 
-            if (forecastTimestamp <= tomorrowTimestamp) {
+            const isAfter = forecastTimestamp >= firstTimestamp
+            const isBefore = forecastTimestamp <= lastTimestamp
+            const forecastDate = new Date(forecastTimestamp)
+            const baseDate = new Date(baseTimestmap)
+            const isSameDay = forecastDate.getDate() === baseDate.getDate()
+            const isNextDay = forecastDate.getDate() === (baseDate.getDate() + 1)
+            const isMidnight = isNextDay && (forecastDate.getHours() === 0)
+
+            if (isAfter && isBefore && (isSameDay || isMidnight)) {
                 return true
             }
             return false
         })
     }, [forecastWeather, citySearch?.timestamp])
 
+
+    function getFirstTimestamp() {
+        if (props.showForecastAfterTimestamps) {
+            return props.showForecastAfterTimestamps
+        }
+
+        const firstHour = new Date()
+        firstHour.setMinutes(0, 0, 0)
+        return firstHour.getTime()
+    }
+
+    function getLastTimestamp() {
+        if (props.showForecastBeforeTimestamps) {
+            return props.showForecastBeforeTimestamps
+        }
+
+        const tomorrow = new Date()
+        tomorrow.setDate(tomorrow.getDate() + 1)
+        tomorrow.setHours(0, 0, 0, 0)
+        return tomorrow.getTime()
+    }
+
+    function getBaseTimestamp() {
+        if (props.baseTimestmap) return props.baseTimestmap
+        return new Date().getTime()
+    }
 
     function goToDetails(timestamp: number) {
         navigation.navigate("Details", { type: "forecast", timestamp })
