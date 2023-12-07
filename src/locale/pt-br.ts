@@ -12,6 +12,9 @@ export const pt_br: TranslationObjectType = {
     CurrentConditions_sunset: "Por do Sol",
     // TodayForecast
     TodayForecast_noTodayForecastAvailable: "Previsão do tempo não disponível para hoje",
+    // WeatherSummary
+    WeatherSummary_noDataAvailable: "Dados de temperatura não disponíveis",
+    WeatherSummary_perceivedTemperature: "Sensação térmica",
     // WeekForecast
     WeekForecast_noWeekForecastAvailable: "Previsão do tempo não disponível para esta semana",
 

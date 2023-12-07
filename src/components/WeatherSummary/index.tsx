@@ -2,19 +2,54 @@ import { Image, View } from "react-native"
 import { useMMKVObject } from "react-native-mmkv"
 import { Text } from "react-native-paper"
 
-import { CurrentWeatherData, STORAGE_KEYS, SearchCity } from "@services/storage"
+import { translate } from "@locale"
+import { CurrentWeatherData, STORAGE_KEYS, SearchCity, WeatherDescription } from "@services/storage"
 import { styles } from "./styles"
 
 
-export function CurrentTemperature() {
+export type WeatherSummaryData = {
+    city: string
+    timestamp: number
+    weather: WeatherDescription[]
+    currentTemperature: number
+    perceivedTemperature: number
+    temperatureMin: number
+    temperatureMax: number
+}
+
+
+export interface WeatherSummaryProps {
+    data?: WeatherSummaryData
+}
+
+
+export function WeatherSummary(props: WeatherSummaryProps) {
 
 
     const [citySearch] = useMMKVObject<SearchCity>(STORAGE_KEYS.SEARCH_CITY)
     const [currentWeather] = useMMKVObject<CurrentWeatherData>(STORAGE_KEYS.CURRENT_WEATHER)
 
+    const weatherSummaryData: WeatherSummaryData | undefined = (() => {
+        if (props.data) return props.data
+
+        if (!currentWeather || !citySearch) {
+            return undefined
+        }
+
+        return {
+            city: citySearch.city,
+            timestamp: citySearch.timestamp,
+            weather: currentWeather.weather,
+            currentTemperature: currentWeather.currentTemperature,
+            perceivedTemperature: currentWeather.perceivedTemperature,
+            temperatureMax: currentWeather.temperatureMax,
+            temperatureMin: currentWeather.temperatureMin,
+        }
+    })()
+
 
     function getTemperature() {
-        const temperature = currentWeather?.currentTemperature
+        const temperature = weatherSummaryData?.currentTemperature
         if (!temperature) return
 
         const temperatureString = temperature.toFixed(0)
@@ -22,9 +57,9 @@ export function CurrentTemperature() {
     }
 
     function getDateTime() {
-        if (!citySearch) return
+        if (!weatherSummaryData) return
 
-        const lastSearchDate = new Date(citySearch.timestamp)
+        const lastSearchDate = new Date(weatherSummaryData.timestamp)
         const date = lastSearchDate.toLocaleDateString()
         const time = lastSearchDate.toLocaleTimeString("default", {
             hour: "2-digit",
@@ -35,8 +70,8 @@ export function CurrentTemperature() {
     }
 
     function getMinMaxTemperature() {
-        const minTemperature = currentWeather?.temperatureMin
-        const maxTemperature = currentWeather?.temperatureMax
+        const minTemperature = weatherSummaryData?.temperatureMin
+        const maxTemperature = weatherSummaryData?.temperatureMax
         if (!minTemperature || !maxTemperature) return
 
         const minTemperatureString = minTemperature.toFixed()
@@ -45,12 +80,19 @@ export function CurrentTemperature() {
     }
 
     function getPerceivedTemperature() {
-        const perceivedTemperature = currentWeather?.perceivedTemperature
+        const perceivedTemperature = weatherSummaryData?.perceivedTemperature
         if (!perceivedTemperature) return
 
         const perceivedTemperatureString = perceivedTemperature.toFixed()
         return `${perceivedTemperatureString}°`
     }
+
+
+    if (!weatherSummaryData) return (
+        <Text variant={"titleLarge"}>
+            {translate("WeatherSummary_noDataAvailable")}
+        </Text>
+    )
 
 
     return (
@@ -62,12 +104,12 @@ export function CurrentTemperature() {
                     </Text>
 
                     <Text variant={"titleMedium"} style={styles.description}>
-                        {currentWeather?.weather[0].description}
+                        {weatherSummaryData.weather[0].description}
                     </Text>
                 </View>
 
                 <Image source={{
-                    uri: `https://openweathermap.org/img/wn/${currentWeather?.weather[0].icon}@4x.png`,
+                    uri: `https://openweathermap.org/img/wn/${weatherSummaryData.weather[0].icon}@4x.png`,
                     width: 100,
                     height: 100,
                 }} />
@@ -75,7 +117,7 @@ export function CurrentTemperature() {
 
             <View>
                 <Text variant={"titleMedium"}>
-                    {citySearch?.city} &bull; {getDateTime()}
+                    {weatherSummaryData.city} &bull; {getDateTime()}
                 </Text>
 
                 <View style={styles.temperaturesContainer}>
@@ -84,7 +126,7 @@ export function CurrentTemperature() {
                     </Text>
 
                     <Text variant={"titleSmall"}>
-                        {"Sensação térmica:"} {getPerceivedTemperature()}
+                        {translate("WeatherSummary_perceivedTemperature")} {getPerceivedTemperature()}
                     </Text>
                 </View>
             </View>

@@ -16,7 +16,7 @@ export interface SearchCity {
 }
 
 
-type WeatherDescription = {
+export type WeatherDescription = {
     id: number
     main: string
     description: string

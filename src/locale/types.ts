@@ -9,6 +9,9 @@ export type TranslationKeyType =
     | "CurrentConditions_sunset"
     // TodayForecast
     | "TodayForecast_noTodayForecastAvailable"
+    // WeatherSummary
+    | "WeatherSummary_noDataAvailable"
+    | "WeatherSummary_perceivedTemperature"
     // WeekForecast
     | "WeekForecast_noWeekForecastAvailable"
 
