@@ -10,7 +10,7 @@ import { styles } from "./styles"
 export function CurrentConditions() {
 
 
-    const [currentWeather, setCurrentWeather] = useMMKVObject<CurrentWeatherData>(STORAGE_KEYS.CURRENT_WEATHER)
+    const [currentWeather] = useMMKVObject<CurrentWeatherData>(STORAGE_KEYS.CURRENT_WEATHER)
 
 
     function getSunRise() {

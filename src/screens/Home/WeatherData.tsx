@@ -8,7 +8,7 @@ import { STORAGE_KEYS, SearchCity } from "@services/storage"
 export function WeatherData() {
 
 
-    const [citySearch, setCitySearch] = useMMKVObject<SearchCity>(STORAGE_KEYS.SEARCH_CITY)
+    const [citySearch] = useMMKVObject<SearchCity>(STORAGE_KEYS.SEARCH_CITY)
 
     const contentContainerStyle: ViewStyle = {
         ...styles.contentContainer,
