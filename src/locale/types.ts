@@ -2,13 +2,14 @@
 export type TranslationKeyType =
     | "ok"
 
-    // CurrentConditions
-    | "CurrentConditions_humidity"
-    | "CurrentConditions_wind"
-    | "CurrentConditions_sunrise"
-    | "CurrentConditions_sunset"
     // TodayForecast
     | "TodayForecast_noTodayForecastAvailable"
+    // WeatherConditions
+    | "WeatherConditions_noData"
+    | "WeatherConditions_humidity"
+    | "WeatherConditions_wind"
+    | "WeatherConditions_sunrise"
+    | "WeatherConditions_sunset"
     // WeatherSummary
     | "WeatherSummary_noDataAvailable"
     | "WeatherSummary_perceivedTemperature"

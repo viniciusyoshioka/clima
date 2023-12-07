@@ -5,13 +5,14 @@ import { TranslationObjectType } from "./types"
 export const pt_br: TranslationObjectType = {
     ok: "Ok",
 
-    // CurrentConditions
-    CurrentConditions_humidity: "Humidade",
-    CurrentConditions_wind: "Vento",
-    CurrentConditions_sunrise: "Nascer do Sol",
-    CurrentConditions_sunset: "Por do Sol",
     // TodayForecast
     TodayForecast_noTodayForecastAvailable: "Previsão do tempo não disponível para hoje",
+    // WeatherConditions
+    WeatherConditions_noData: "Condições do clima não disponíveis",
+    WeatherConditions_humidity: "Humidade",
+    WeatherConditions_wind: "Vento",
+    WeatherConditions_sunrise: "Nascer do Sol",
+    WeatherConditions_sunset: "Por do Sol",
     // WeatherSummary
     WeatherSummary_noDataAvailable: "Dados de temperatura não disponíveis",
     WeatherSummary_perceivedTemperature: "Sensação térmica",
