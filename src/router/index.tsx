@@ -3,9 +3,13 @@ import { NativeStackNavigationOptions, createNativeStackNavigator } from "@react
 import { useColorScheme } from "react-native"
 
 import { Home } from "@screens/Home"
+import { ScreenParams } from "./types"
 
 
-const NativeStack = createNativeStackNavigator()
+export * from "./types"
+
+
+const NativeStack = createNativeStackNavigator<ScreenParams>()
 
 
 export function Router() {
