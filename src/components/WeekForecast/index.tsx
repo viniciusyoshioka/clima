@@ -1,11 +1,14 @@
 /* eslint-disable camelcase */
+import { useNavigation } from "@react-navigation/native"
 import { useMemo } from "react"
-import { View, ViewStyle } from "react-native"
+import { Pressable, View, ViewStyle } from "react-native"
 import { useMMKVObject } from "react-native-mmkv"
 import { Divider, Text, useTheme } from "react-native-paper"
 import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons"
 
+import { Color, Prism } from "@elementium/color"
 import { translate } from "@locale"
+import { NavigationParamProps } from "@router"
 import { ForecastWeatherData, STORAGE_KEYS, SearchCity } from "@services/storage"
 import { styles } from "./styles"
 
@@ -14,6 +17,8 @@ export function WeekForecast() {
 
 
     const { colors } = useTheme()
+
+    const navigation = useNavigation<NavigationParamProps<"Home">>()
 
     const [citySearch] = useMMKVObject<SearchCity>(STORAGE_KEYS.SEARCH_CITY)
     const [forecastWeather] = useMMKVObject<ForecastWeatherData>(STORAGE_KEYS.FORECAST_WEATHER)
@@ -89,9 +94,21 @@ export function WeekForecast() {
     }, [forecastWeather, citySearch?.timestamp])
 
 
+    function goToDetails(timestamp: number) {
+        navigation.navigate("Details", { type: "forecast", timestamp })
+    }
+
     function WeekForecastItem(item: ForecastWeatherData[0]) {
+        const backgroundColor = new Color(colors.surface)
+        const overlayColor = new Color("white").setA(0.3)
+        const rippleColor = Prism.addColors(backgroundColor, overlayColor).toRgba()
+
         return (
-            <View style={styles.itemContainer}>
+            <Pressable
+                style={styles.itemContainer}
+                android_ripple={{ color: rippleColor, foreground: true }}
+                onPress={() => goToDetails(item.dt)}
+            >
                 <Text variant={"titleSmall"} style={[styles.itemDayName, { color: colors.onSurface } ]}>
                     {formatForecastDate(item.dt)}
                 </Text>
@@ -111,7 +128,7 @@ export function WeekForecast() {
                 <Text variant={"titleSmall"} style={[ { color: colors.onSurface } ]}>
                     {`${formatForecastTemperature(item.main.temp_min)} / ${formatForecastTemperature(item.main.temp_max)}`}
                 </Text>
-            </View>
+            </Pressable>
         )
     }
 
