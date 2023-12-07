@@ -1,10 +1,13 @@
+import { Color, Prism } from "@elementium/color"
+import { useNavigation } from "@react-navigation/native"
 import { useMemo } from "react"
-import { Image, ScrollView, View, ViewStyle } from "react-native"
+import { Image, Pressable, ScrollView, View, ViewStyle } from "react-native"
 import { useMMKVObject } from "react-native-mmkv"
 import { Divider, Text, useTheme } from "react-native-paper"
 import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons"
 
 import { translate } from "@locale"
+import { NavigationParamProps } from "@router"
 import { ForecastWeatherData, STORAGE_KEYS, SearchCity } from "@services/storage"
 import { styles } from "./styles"
 
@@ -13,6 +16,8 @@ export function TodayForecast() {
 
 
     const { colors } = useTheme()
+
+    const navigation = useNavigation<NavigationParamProps<"Home">>()
 
     const [citySearch] = useMMKVObject<SearchCity>(STORAGE_KEYS.SEARCH_CITY)
     const [forecastWeather] = useMMKVObject<ForecastWeatherData>(STORAGE_KEYS.FORECAST_WEATHER)
@@ -35,9 +40,21 @@ export function TodayForecast() {
     }, [forecastWeather, citySearch?.timestamp])
 
 
+    function goToDetails(timestamp: number) {
+        navigation.navigate("Details", { type: "forecast", timestamp })
+    }
+
     function HourForecastItem(data: ForecastWeatherData[0]) {
+        const backgroundColor = new Color(colors.surface)
+        const overlayColor = new Color("white").setA(0.3)
+        const rippleColor = Prism.addColors(backgroundColor, overlayColor).toRgba()
+
         return (
-            <View style={styles.itemContainer}>
+            <Pressable
+                style={styles.itemContainer}
+                android_ripple={{ color: rippleColor, foreground: true }}
+                onPress={() => goToDetails(data.dt)}
+            >
                 <Text variant={"titleSmall"} style={{ color: colors.onSurface }}>
                     {formatForecastTimestamp(data.dt)}
                 </Text>
@@ -66,7 +83,7 @@ export function TodayForecast() {
                         {formatForecastPrecipitation(data.pop)}
                     </Text>
                 </View>
-            </View>
+            </Pressable>
         )
     }
 

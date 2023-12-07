@@ -8,11 +8,14 @@ export const styles = StyleSheet.create({
     },
     contentContainer: {
         padding: 16,
-        gap: 10,
+        gap: 4,
     },
     itemContainer: {
         alignItems: "center",
         justifyContent: "center",
+        padding: 6,
+        borderRadius: 4,
+        overflow: "hidden",
     },
     itemIcon: {
         marginVertical: 8,
