@@ -4,7 +4,10 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack"
 
 export type ScreenParams = {
     Home: undefined
-    Details: undefined
+    Details: {
+        type: "current" | "forecast"
+        timestamp?: number
+    }
 }
 
 
