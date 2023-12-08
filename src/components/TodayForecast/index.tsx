@@ -1,5 +1,5 @@
 import { Color, Prism } from "@elementium/color"
-import { useNavigation } from "@react-navigation/native"
+import { useNavigation, useRoute } from "@react-navigation/native"
 import { useMemo } from "react"
 import { Image, Pressable, ScrollView, View, ViewStyle } from "react-native"
 import { useMMKVObject } from "react-native-mmkv"
@@ -25,7 +25,9 @@ export function TodayForecast(props: TodayForecastProps) {
     const { colors } = useTheme()
 
     const navigation = useNavigation<NavigationParamProps<"Home">>()
+    const { name } = useRoute()
 
+    const disableNavigation = name === "Details"
     const [citySearch] = useMMKVObject<SearchCity>(STORAGE_KEYS.SEARCH_CITY)
     const [forecastWeather] = useMMKVObject<ForecastWeatherData>(STORAGE_KEYS.FORECAST_WEATHER)
     const todayForecastWeather = useMemo(() => {
@@ -81,6 +83,8 @@ export function TodayForecast(props: TodayForecastProps) {
     }
 
     function goToDetails(timestamp: number) {
+        if (disableNavigation) return
+
         navigation.navigate("Details", { type: "forecast", timestamp })
     }
 
@@ -94,6 +98,7 @@ export function TodayForecast(props: TodayForecastProps) {
                 style={styles.itemContainer}
                 android_ripple={{ color: rippleColor, foreground: true }}
                 onPress={() => goToDetails(data.dt)}
+                disabled={disableNavigation}
             >
                 <Text variant={"titleSmall"} style={{ color: colors.onSurface }}>
                     {formatForecastTimestamp(data.dt)}

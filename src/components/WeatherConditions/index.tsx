@@ -1,11 +1,11 @@
-import { useNavigation } from "@react-navigation/native"
+import { useNavigation, useRoute } from "@react-navigation/native"
 import { View } from "react-native"
 import { useMMKVObject } from "react-native-mmkv"
+import { Text } from "react-native-paper"
 
 import { translate } from "@locale"
 import { NavigationParamProps } from "@router"
 import { CurrentWeatherData, STORAGE_KEYS, SearchCity } from "@services/storage"
-import { Text } from "react-native-paper"
 import { ConditionCard } from "../ConditionCard"
 import { styles } from "./styles"
 
@@ -28,7 +28,9 @@ export function WeatherConditions(props: WeatherConditionsProps) {
 
 
     const navigation = useNavigation<NavigationParamProps<"Home">>()
+    const { name } = useRoute()
 
+    const disableNavigation = name === "Details"
     const [citySearch] = useMMKVObject<SearchCity>(STORAGE_KEYS.SEARCH_CITY)
     const [currentWeather] = useMMKVObject<CurrentWeatherData>(STORAGE_KEYS.CURRENT_WEATHER)
 
@@ -70,6 +72,7 @@ export function WeatherConditions(props: WeatherConditionsProps) {
     }
 
     function goToDetails() {
+        if (disableNavigation) return
         if (!weatherConditionsData) return
 
         if (props.data) {
@@ -95,6 +98,7 @@ export function WeatherConditions(props: WeatherConditionsProps) {
                     title={translate("WeatherConditions_humidity")}
                     value={`${currentWeather?.humidity}%`}
                     onPress={goToDetails}
+                    disabled={disableNavigation}
                 />
 
                 <ConditionCard
@@ -102,6 +106,7 @@ export function WeatherConditions(props: WeatherConditionsProps) {
                     title={translate("WeatherConditions_wind")}
                     value={`${currentWeather?.windSpeed} m/s`}
                     onPress={goToDetails}
+                    disabled={disableNavigation}
                 />
             </View>
 
@@ -111,6 +116,7 @@ export function WeatherConditions(props: WeatherConditionsProps) {
                     title={translate("WeatherConditions_sunrise")}
                     value={`${getSunRise()}`}
                     onPress={goToDetails}
+                    disabled={disableNavigation}
                 />
 
                 <ConditionCard
@@ -118,6 +124,7 @@ export function WeatherConditions(props: WeatherConditionsProps) {
                     title={translate("WeatherConditions_sunset")}
                     value={`${getSunSet()}`}
                     onPress={goToDetails}
+                    disabled={disableNavigation}
                 />
             </View>
         </View>
