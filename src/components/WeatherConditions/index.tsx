@@ -75,7 +75,9 @@ export function WeatherConditions(props: WeatherConditionsProps) {
     function getPrecipitationPercentage() {
         if (!weatherConditionsData || !weatherConditionsData.precipitationPercentage) return
 
-        return `${weatherConditionsData.precipitationPercentage * 100}%`
+        const percentagePrecipitation = weatherConditionsData.precipitationPercentage * 100
+        const normalizedPrecipitation = percentagePrecipitation.toFixed(0)
+        return `${normalizedPrecipitation}%`
     }
 
     function goToDetails() {
