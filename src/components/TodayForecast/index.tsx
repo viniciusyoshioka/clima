@@ -14,8 +14,6 @@ import { styles } from "./styles"
 
 export interface TodayForecastProps {
     baseTimestmap?: number
-    showForecastAfterTimestamps?: number
-    showForecastBeforeTimestamps?: number
 }
 
 
@@ -57,10 +55,6 @@ export function TodayForecast(props: TodayForecastProps) {
 
 
     function getFirstTimestamp() {
-        if (props.showForecastAfterTimestamps) {
-            return props.showForecastAfterTimestamps
-        }
-
         if (props.baseTimestmap) {
             const baseDate = new Date(props.baseTimestmap * 1000)
             baseDate.setHours(0, 0, 0, 0)
@@ -73,10 +67,6 @@ export function TodayForecast(props: TodayForecastProps) {
     }
 
     function getLastTimestamp() {
-        if (props.showForecastBeforeTimestamps) {
-            return props.showForecastBeforeTimestamps
-        }
-
         if (props.baseTimestmap) {
             const baseDate = new Date(props.baseTimestmap * 1000)
             baseDate.setDate(baseDate.getDate() + 1)
