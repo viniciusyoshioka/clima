@@ -39,6 +39,9 @@ export type TranslationKeyType =
     | "LocationInput_errorGettingLocationCoordinatesFromAddress_message"
     | "LocationInput_placeholder"
 
+    // Details
+    | "Details_header_title"
+
 
 export type TranslationObjectType = {
     [key in TranslationKeyType]: string

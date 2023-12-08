@@ -1,18 +1,19 @@
-import { useRoute } from "@react-navigation/native"
+import { useNavigation, useRoute } from "@react-navigation/native"
 import { ScrollView } from "react-native"
 import { useMMKVObject } from "react-native-mmkv"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { Appbar } from "react-native-paper"
 
 import { TodayForecast, WeatherConditions, WeatherConditionsData, WeatherSummary, WeatherSummaryData } from "@components"
-import { RouteParamProps } from "@router"
+import { translate } from "@locale"
+import { NavigationParamProps, RouteParamProps } from "@router"
 import { CurrentWeatherData, ForecastWeatherData, STORAGE_KEYS, SearchCity } from "@services/storage"
 
 
 export function Details() {
 
 
+    const navigation = useNavigation<NavigationParamProps<"Details">>()
     const { params } = useRoute<RouteParamProps<"Details">>()
-    const safeAreaInsets = useSafeAreaInsets()
 
     const [citySearch] = useMMKVObject<SearchCity>(STORAGE_KEYS.SEARCH_CITY)
     const [currentWeather] = useMMKVObject<CurrentWeatherData>(STORAGE_KEYS.CURRENT_WEATHER)
@@ -86,16 +87,47 @@ export function Details() {
     })()
 
 
-    return (
-        <ScrollView
-            style={{ marginTop: safeAreaInsets.top }}
-            contentContainerStyle={{ padding: 16, gap: 16 }}
-        >
+    function formatDate() {
+        if (params.timestamp) {
+            const date = new Date(params.timestamp * 1000)
+            return date.toLocaleDateString()
+        }
+
+        if (!citySearch) return
+        const date = new Date(citySearch.timestamp)
+        return date.toLocaleDateString()
+    }
+
+    function formatTime() {
+        if (params.timestamp) {
+            const date = new Date(params.timestamp * 1000)
+            return date.toLocaleTimeString("default", {
+                hour: "2-digit",
+                minute: "2-digit",
+            })
+        }
+
+        if (!citySearch) return
+        const date = new Date(citySearch.timestamp)
+        return date.toLocaleTimeString("default", {
+            hour: "2-digit",
+            minute: "2-digit",
+        })
+    }
+
+
+    return <>
+        <Appbar.Header>
+            <Appbar.BackAction onPress={navigation.goBack} />
+            <Appbar.Content title={`${translate("Details_header_title")}: ${formatDate()} ${formatTime()}`} />
+        </Appbar.Header>
+
+        <ScrollView contentContainerStyle={{ padding: 16, gap: 16 }}>
             <WeatherSummary data={weatherSummaryData} showDateTime={false} />
 
             <WeatherConditions data={weatherConditionsData} />
 
             <TodayForecast baseTimestmap={params.timestamp} />
         </ScrollView>
-    )
+    </>
 }

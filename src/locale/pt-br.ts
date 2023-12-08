@@ -41,4 +41,7 @@ export const pt_br: TranslationObjectType = {
     LocationInput_errorGettingLocationCoordinatesFromAddress_title: "Não foi possível obter a sua localização",
     LocationInput_errorGettingLocationCoordinatesFromAddress_message: "Houve um erro ao obter suas coordenadas com base no nome da cidade fornecida.",
     LocationInput_placeholder: "Pesquisar cidade",
+
+    // Details
+    Details_header_title: "Detalhes",
 }
