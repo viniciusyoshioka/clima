@@ -1,7 +1,7 @@
 import { Color, Prism } from "@elementium/color"
 import { useNavigation, useRoute } from "@react-navigation/native"
 import { useMemo } from "react"
-import { Image, Pressable, ScrollView, View, ViewStyle } from "react-native"
+import { FlatList, Image, Pressable, View, ViewStyle } from "react-native"
 import { useMMKVObject } from "react-native-mmkv"
 import { Divider, Text, useTheme } from "react-native-paper"
 import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons"
@@ -162,34 +162,27 @@ export function TodayForecast(props: TodayForecastProps) {
 
 
     return (
-        <ScrollView
-            style={containerStyle}
-            contentContainerStyle={styles.contentContainer}
+        <FlatList
+            data={todayForecastWeather}
+            renderItem={({ item }) => <HourForecastItem {...item} />}
+            ItemSeparatorComponent={() => (
+                <Divider style={{
+                    height: "100%",
+                    width: 1,
+                    backgroundColor: colors.onSurfaceDisabled,
+                }} />
+            )}
+            ListEmptyComponent={() => (
+                <Text
+                    variant={"titleSmall"}
+                    style={{ color: colors.onSurface }}
+                    children={translate("TodayForecast_noTodayForecastAvailable")}
+                />
+            )}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
-        >
-            {(todayForecastWeather.length > 0) && todayForecastWeather.map((forecast, index) => (
-                <>
-                    <HourForecastItem {...forecast} key={`${index}-item`} />
-
-                    {(index < (todayForecastWeather.length - 1)) && (
-                        <Divider
-                            style={{
-                                height: "100%",
-                                width: 1,
-                                backgroundColor: colors.onSurfaceDisabled,
-                            }}
-                            key={`${index}-divider`}
-                        />
-                    )}
-                </>
-            ))}
-
-            {(todayForecastWeather.length === 0) && (
-                <Text variant={"titleSmall"} style={{ color: colors.onSurface }} key={"no-forecast-alert"}>
-                    {translate("TodayForecast_noTodayForecastAvailable")}
-                </Text>
-            )}
-        </ScrollView>
+            style={containerStyle}
+            contentContainerStyle={styles.contentContainer}
+        />
     )
 }
