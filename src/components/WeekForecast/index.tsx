@@ -30,7 +30,7 @@ export function WeekForecast() {
         tomorrow.setHours(0, 0, 0, 0)
         const tomorrowTimestamp = tomorrow.getTime()
 
-        const filteredForecastWeather = forecastWeather.filter(forecast => {
+        const filteredForecastWeather = forecastWeather.list.filter(forecast => {
             const forecastTimestamp = forecast.dt * 1000
 
             if (forecastTimestamp >= tomorrowTimestamp) {
@@ -39,7 +39,7 @@ export function WeekForecast() {
             return false
         })
 
-        const weekForecastToReturn: ForecastWeatherData = []
+        const weekForecastToReturn: ForecastWeatherData["list"] = []
         for (let i = 0; i < filteredForecastWeather.length; i++) {
             if (weekForecastToReturn.length === 0) {
                 weekForecastToReturn.push(filteredForecastWeather[i])
@@ -59,7 +59,7 @@ export function WeekForecast() {
                 continue
             }
 
-            const meanDayForecast: ForecastWeatherData[0] = {
+            const meanDayForecast: ForecastWeatherData["list"][0] = {
                 dt: (previousForecast.dt + currentForecast.dt) / 2,
                 main: {
                     feels_like: (previousForecast.main.feels_like + currentForecast.main.feels_like) / 2,
@@ -98,7 +98,7 @@ export function WeekForecast() {
         navigation.navigate("Details", { type: "forecast", timestamp })
     }
 
-    function WeekForecastItem(item: ForecastWeatherData[0]) {
+    function WeekForecastItem(item: ForecastWeatherData["list"][0]) {
         const backgroundColor = new Color(colors.surface)
         const overlayColor = new Color("white").setA(0.3)
         const rippleColor = Prism.addColors(backgroundColor, overlayColor).toRgba()

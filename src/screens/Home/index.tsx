@@ -70,7 +70,7 @@ export function Home() {
         const response = await openWeatherMap.get(OPEN_WEATHER_MAP.routes.forecast, { params })
         const data = response.data as ForecastResponse
 
-        setForecastWeather(data.list)
+        setForecastWeather(data)
     }
 
 

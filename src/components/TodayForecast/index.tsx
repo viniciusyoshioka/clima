@@ -37,7 +37,7 @@ export function TodayForecast(props: TodayForecastProps) {
         const lastTimestamp = getLastTimestamp()
         const baseTimestmap = getBaseTimestamp()
 
-        return forecastWeather.filter(forecast => {
+        return forecastWeather.list.filter(forecast => {
             const forecastTimestamp = forecast.dt * 1000
 
             const isAfter = forecastTimestamp >= firstTimestamp
@@ -88,7 +88,7 @@ export function TodayForecast(props: TodayForecastProps) {
         navigation.navigate("Details", { type: "forecast", timestamp })
     }
 
-    function HourForecastItem(data: ForecastWeatherData[0]) {
+    function HourForecastItem(data: ForecastWeatherData["list"][0]) {
         const backgroundColor = new Color(colors.surface)
         const overlayColor = new Color("white").setA(0.3)
         const rippleColor = Prism.addColors(backgroundColor, overlayColor).toRgba()

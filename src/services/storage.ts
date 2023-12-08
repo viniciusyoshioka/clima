@@ -40,4 +40,4 @@ export interface CurrentWeatherData {
 }
 
 
-export type ForecastWeatherData = ForecastResponse["list"]
+export type ForecastWeatherData = ForecastResponse
