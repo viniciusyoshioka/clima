@@ -115,6 +115,15 @@ export function Details() {
         })
     }
 
+    const showTodayForecast = (() => {
+        const isForecastType = params.type === "forecast"
+        const isToday = params.timestamp
+            ? new Date(params.timestamp * 1000).getDate() === new Date().getDate()
+            : false
+
+        return isForecastType && !isToday
+    })()
+
 
     return <>
         <Appbar.Header>
@@ -127,7 +136,7 @@ export function Details() {
 
             <WeatherConditions data={weatherConditionsData} />
 
-            <TodayForecast baseTimestmap={params.timestamp} />
+            {showTodayForecast && <TodayForecast baseTimestmap={params.timestamp} />}
         </ScrollView>
     </>
 }
