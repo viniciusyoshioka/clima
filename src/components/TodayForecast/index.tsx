@@ -39,7 +39,7 @@ export function TodayForecast(props: TodayForecastProps) {
             const forecastTimestamp = forecast.dt * 1000
 
             const isAfter = forecastTimestamp >= firstTimestamp
-            const isBefore = forecastTimestamp <= lastTimestamp
+            const isBefore = forecastTimestamp < lastTimestamp
             const forecastDate = new Date(forecastTimestamp)
             const baseDate = new Date(baseTimestmap)
             const isSameDay = forecastDate.getDate() === baseDate.getDate()
