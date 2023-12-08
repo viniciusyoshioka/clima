@@ -13,6 +13,7 @@ export const pt_br: TranslationObjectType = {
     WeatherConditions_wind: "Vento",
     WeatherConditions_sunrise: "Nascer do Sol",
     WeatherConditions_sunset: "Por do Sol",
+    WeatherConditions_rainChance: "Chance de chuva",
     // WeatherSummary
     WeatherSummary_noDataAvailable: "Dados de temperatura não disponíveis",
     WeatherSummary_perceivedTemperature: "Sensação térmica",

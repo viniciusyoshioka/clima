@@ -10,6 +10,7 @@ export type TranslationKeyType =
     | "WeatherConditions_wind"
     | "WeatherConditions_sunrise"
     | "WeatherConditions_sunset"
+    | "WeatherConditions_rainChance"
     // WeatherSummary
     | "WeatherSummary_noDataAvailable"
     | "WeatherSummary_perceivedTemperature"

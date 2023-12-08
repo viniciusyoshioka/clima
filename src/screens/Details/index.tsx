@@ -81,6 +81,7 @@ export function Details() {
             windSpeed: filteredForecastData.wind.speed,
             sunriseTimestamp: forecastWeather.city.sunrise,
             sunsetTimestamp: forecastWeather.city.sunset,
+            precipitationPercentage: filteredForecastData.pop,
         }
     })()
 

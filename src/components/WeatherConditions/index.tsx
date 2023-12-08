@@ -16,6 +16,7 @@ export type WeatherConditionsData = {
     windSpeed: number
     sunriseTimestamp: number
     sunsetTimestamp: number
+    precipitationPercentage?: number
 }
 
 
@@ -69,6 +70,12 @@ export function WeatherConditions(props: WeatherConditionsProps) {
             hour: "2-digit",
             minute: "2-digit",
         })
+    }
+
+    function getPrecipitationPercentage() {
+        if (!weatherConditionsData || !weatherConditionsData.precipitationPercentage) return
+
+        return `${weatherConditionsData.precipitationPercentage * 100}%`
     }
 
     function goToDetails() {
@@ -127,6 +134,18 @@ export function WeatherConditions(props: WeatherConditionsProps) {
                     disabled={disableNavigation}
                 />
             </View>
+
+            {weatherConditionsData.precipitationPercentage && (
+                <View style={styles.conditionLine}>
+                    <ConditionCard
+                        icon={"weather-pouring"}
+                        title={translate("WeatherConditions_rainChance")}
+                        value={`${getPrecipitationPercentage()}`}
+                        onPress={goToDetails}
+                        disabled={disableNavigation}
+                    />
+                </View>
+            )}
         </View>
     )
 }
