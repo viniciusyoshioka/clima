@@ -20,11 +20,14 @@ export type WeatherSummaryData = {
 
 export interface WeatherSummaryProps {
     data?: WeatherSummaryData
+    showDateTime?: boolean
 }
 
 
 export function WeatherSummary(props: WeatherSummaryProps) {
 
+
+    const showDateTime = props.showDateTime ?? true
 
     const [citySearch] = useMMKVObject<SearchCity>(STORAGE_KEYS.SEARCH_CITY)
     const [currentWeather] = useMMKVObject<CurrentWeatherData>(STORAGE_KEYS.CURRENT_WEATHER)
@@ -117,7 +120,7 @@ export function WeatherSummary(props: WeatherSummaryProps) {
 
             <View>
                 <Text variant={"titleMedium"}>
-                    {weatherSummaryData.city} &bull; {getDateTime()}
+                    {weatherSummaryData.city} {showDateTime && <>&bull; {getDateTime()}</>}
                 </Text>
 
                 <View style={styles.temperaturesContainer}>
