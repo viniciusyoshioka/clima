@@ -137,7 +137,7 @@ export function WeatherConditions(props: WeatherConditionsProps) {
                 />
             </View>
 
-            {weatherConditionsData.precipitationPercentage && (
+            {!!weatherConditionsData.precipitationPercentage && (
                 <View style={styles.conditionLine}>
                     <ConditionCard
                         icon={"weather-pouring"}
