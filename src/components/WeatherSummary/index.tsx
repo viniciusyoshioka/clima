@@ -120,9 +120,7 @@ export function WeatherSummary(props: WeatherSummaryProps) {
 
                 <Image
                     source={{
-                        uri: "https://openweathermap.org/img/wn/"
-                        + weatherSummaryData.weather[0].icon
-                        + "@4x.png",
+                        uri: `https://openweathermap.org/img/wn/${weatherSummaryData.weather[0].icon}@4x.png`,
                         width: 100,
                         height: 100,
                     }}
