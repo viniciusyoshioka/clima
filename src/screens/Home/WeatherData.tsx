@@ -1,7 +1,12 @@
 import { ScrollView, StatusBar, StyleSheet, ViewStyle } from "react-native"
 import { useMMKVObject } from "react-native-mmkv"
 
-import { TodayForecast, WeatherConditions, WeatherSummary, WeekForecast } from "@components"
+import {
+    TodayForecast,
+    WeatherConditions,
+    WeatherSummary,
+    WeekForecast,
+} from "@components"
 import { STORAGE_KEYS, SearchCity } from "@services/storage"
 
 

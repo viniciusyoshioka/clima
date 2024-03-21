@@ -3,10 +3,21 @@ import { ScrollView } from "react-native"
 import { useMMKVObject } from "react-native-mmkv"
 import { Appbar } from "react-native-paper"
 
-import { TodayForecast, WeatherConditions, WeatherConditionsData, WeatherSummary, WeatherSummaryData } from "@components"
+import {
+    TodayForecast,
+    WeatherConditions,
+    WeatherConditionsData,
+    WeatherSummary,
+    WeatherSummaryData,
+} from "@components"
 import { translate } from "@locale"
 import { NavigationParamProps, RouteParamProps } from "@router"
-import { CurrentWeatherData, ForecastWeatherData, STORAGE_KEYS, SearchCity } from "@services/storage"
+import {
+    CurrentWeatherData,
+    ForecastWeatherData,
+    STORAGE_KEYS,
+    SearchCity,
+} from "@services/storage"
 
 
 export function Details() {
@@ -16,8 +27,12 @@ export function Details() {
     const { params } = useRoute<RouteParamProps<"Details">>()
 
     const [citySearch] = useMMKVObject<SearchCity>(STORAGE_KEYS.SEARCH_CITY)
-    const [currentWeather] = useMMKVObject<CurrentWeatherData>(STORAGE_KEYS.CURRENT_WEATHER)
-    const [forecastWeather] = useMMKVObject<ForecastWeatherData>(STORAGE_KEYS.FORECAST_WEATHER)
+    const [currentWeather] = useMMKVObject<CurrentWeatherData>(
+        STORAGE_KEYS.CURRENT_WEATHER
+    )
+    const [forecastWeather] = useMMKVObject<ForecastWeatherData>(
+        STORAGE_KEYS.FORECAST_WEATHER
+    )
 
     const weatherSummaryData: WeatherSummaryData | undefined = (() => {
         if (!citySearch || !currentWeather || !forecastWeather) return undefined
@@ -32,7 +47,11 @@ export function Details() {
             weather: currentWeather.weather,
         }
 
-        const filteredForecastData = forecastWeather.list.reduce((previous, current, index) => {
+        const filteredForecastData = forecastWeather.list.reduce((
+            previous,
+            current,
+            index,
+        ) => {
             if (index === 0) return current
 
             const timestamp = params.timestamp ?? 0
@@ -65,7 +84,11 @@ export function Details() {
             sunsetTimestamp: currentWeather.sunsetTimestamp,
         }
 
-        const filteredForecastData = forecastWeather.list.reduce((previous, current, index) => {
+        const filteredForecastData = forecastWeather.list.reduce((
+            previous,
+            current,
+            index,
+        ) => {
             if (index === 0) return current
 
             const timestamp = params.timestamp ?? 0
@@ -125,18 +148,24 @@ export function Details() {
     })()
 
 
-    return <>
-        <Appbar.Header>
-            <Appbar.BackAction onPress={navigation.goBack} />
-            <Appbar.Content title={`${translate("Details_header_title")}: ${formatDate()} ${formatTime()}`} />
-        </Appbar.Header>
+    return (
+        <>
+            <Appbar.Header>
+                <Appbar.BackAction onPress={navigation.goBack} />
+                <Appbar.Content
+                    title={`${translate("Details_header_title")}: ${formatDate()} ${formatTime()}`}
+                />
+            </Appbar.Header>
 
-        <ScrollView contentContainerStyle={{ padding: 16, gap: 16 }}>
-            <WeatherSummary data={weatherSummaryData} showDateTime={false} />
+            <ScrollView contentContainerStyle={{ padding: 16, gap: 16 }}>
+                <WeatherSummary data={weatherSummaryData} showDateTime={false} />
 
-            <WeatherConditions data={weatherConditionsData} />
+                <WeatherConditions data={weatherConditionsData} />
 
-            {showTodayForecast && <TodayForecast baseTimestmap={params.timestamp} />}
-        </ScrollView>
-    </>
+                {showTodayForecast && (
+                    <TodayForecast baseTimestmap={params.timestamp} />
+                )}
+            </ScrollView>
+        </>
+    )
 }

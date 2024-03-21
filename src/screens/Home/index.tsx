@@ -2,9 +2,19 @@ import { useEffect } from "react"
 import { Alert } from "react-native"
 import { useMMKV, useMMKVObject } from "react-native-mmkv"
 
-import { CurrentWeatherResponse, ForecastResponse, OPEN_WEATHER_MAP, openWeatherMap } from "@api"
+import {
+    CurrentWeatherResponse,
+    ForecastResponse,
+    OPEN_WEATHER_MAP,
+    openWeatherMap,
+} from "@api"
 import { translate } from "@locale"
-import { CurrentWeatherData, ForecastWeatherData, STORAGE_KEYS, SearchCity } from "@services/storage"
+import {
+    CurrentWeatherData,
+    ForecastWeatherData,
+    STORAGE_KEYS,
+    SearchCity,
+} from "@services/storage"
 import { LocationInput } from "./LocationInput"
 import { WeatherData } from "./WeatherData"
 
@@ -13,9 +23,15 @@ export function Home() {
 
 
     const mmkv = useMMKV()
-    const [citySearch, setCitySearch] = useMMKVObject<SearchCity>(STORAGE_KEYS.SEARCH_CITY)
-    const [, setCurrentWeather] = useMMKVObject<CurrentWeatherData>(STORAGE_KEYS.CURRENT_WEATHER)
-    const [, setForecastWeather] = useMMKVObject<ForecastWeatherData>(STORAGE_KEYS.FORECAST_WEATHER)
+    const [citySearch, setCitySearch] = useMMKVObject<SearchCity>(
+        STORAGE_KEYS.SEARCH_CITY
+    )
+    const [, setCurrentWeather] = useMMKVObject<CurrentWeatherData>(
+        STORAGE_KEYS.CURRENT_WEATHER
+    )
+    const [, setForecastWeather] = useMMKVObject<ForecastWeatherData>(
+        STORAGE_KEYS.FORECAST_WEATHER
+    )
 
 
     async function getWeatherData(search: SearchCity) {
@@ -43,7 +59,10 @@ export function Home() {
         const { latitude, longitude } = search
         const params = { lat: latitude, lon: longitude }
 
-        const response = await openWeatherMap.get(OPEN_WEATHER_MAP.routes.currentWeather, { params })
+        const response = await openWeatherMap.get(
+            OPEN_WEATHER_MAP.routes.currentWeather,
+            { params }
+        )
         const data = response.data as CurrentWeatherResponse
 
         setCurrentWeather({
@@ -67,7 +86,10 @@ export function Home() {
         const { latitude, longitude } = search
         const params = { lat: latitude, lon: longitude, cnt: amountOfTimestamps }
 
-        const response = await openWeatherMap.get(OPEN_WEATHER_MAP.routes.forecast, { params })
+        const response = await openWeatherMap.get(
+            OPEN_WEATHER_MAP.routes.forecast,
+            { params }
+        )
         const data = response.data as ForecastResponse
 
         setForecastWeather(data)
@@ -102,9 +124,11 @@ export function Home() {
     }, [])
 
 
-    return <>
-        <LocationInput />
+    return (
+        <>
+            <LocationInput />
 
-        <WeatherData />
-    </>
+            <WeatherData />
+        </>
+    )
 }

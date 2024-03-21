@@ -1,5 +1,15 @@
 import { useRef, useState } from "react"
-import { Alert, Pressable, PressableAndroidRippleConfig, StyleProp, StyleSheet, TextInput, TextStyle, View, ViewStyle } from "react-native"
+import {
+    Alert,
+    Pressable,
+    PressableAndroidRippleConfig,
+    StyleProp,
+    StyleSheet,
+    TextInput,
+    TextStyle,
+    View,
+    ViewStyle,
+} from "react-native"
 import { GeoPosition } from "react-native-geolocation-service"
 import { useMMKVObject } from "react-native-mmkv"
 import { Icon, useTheme } from "react-native-paper"
@@ -25,7 +35,9 @@ export function LocationInput(props: LocationInputProps) {
     const { colors, fonts } = useTheme()
 
     const locationInputRef = useRef<TextInput>(null)
-    const [citySearch, setCitySearch] = useMMKVObject<SearchCity>(STORAGE_KEYS.SEARCH_CITY)
+    const [citySearch, setCitySearch] = useMMKVObject<SearchCity>(
+        STORAGE_KEYS.SEARCH_CITY
+    )
     const [text, setText] = useState(citySearch?.city ?? "")
     const hasText = text !== undefined && text.length > 0
 
@@ -54,7 +66,11 @@ export function LocationInput(props: LocationInputProps) {
 
     function GetLocationButton() {
         return (
-            <Pressable style={styles.button} onPress={getLocationByGps} android_ripple={ripple}>
+            <Pressable
+                style={styles.button}
+                onPress={getLocationByGps}
+                android_ripple={ripple}
+            >
                 <Icon source={"map-marker-outline"} size={24} />
             </Pressable>
         )
@@ -62,7 +78,11 @@ export function LocationInput(props: LocationInputProps) {
 
     function SearchLocationButton() {
         return (
-            <Pressable style={styles.button} onPress={getLocationBySearch} android_ripple={ripple}>
+            <Pressable
+                style={styles.button}
+                onPress={getLocationBySearch}
+                android_ripple={ripple}
+            >
                 <Icon source={"send"} size={24} />
             </Pressable>
         )
@@ -73,7 +93,9 @@ export function LocationInput(props: LocationInputProps) {
         const locationCoordinates = await getLocationCoordinates()
         if (!locationCoordinates) return
 
-        const locationAddress = await getLocationAddressFromCoordinates(locationCoordinates)
+        const locationAddress = await getLocationAddressFromCoordinates(
+            locationCoordinates
+        )
         if (!locationAddress) return
 
         const { coords, timestamp } = locationCoordinates
@@ -105,14 +127,19 @@ export function LocationInput(props: LocationInputProps) {
         return
     }
 
-    async function getLocationAddressFromCoordinates(coordinates: GeoPosition): Promise<GeocodingResponse | undefined> {
+    async function getLocationAddressFromCoordinates(
+        coordinates: GeoPosition
+    ): Promise<GeocodingResponse | undefined> {
         const params = {
             lat: coordinates.coords.latitude,
             lon: coordinates.coords.longitude,
         }
 
         try {
-            const response = await openWeatherMap.get(OPEN_WEATHER_MAP.routes.reverseGeocoding, { params })
+            const response = await openWeatherMap.get(
+                OPEN_WEATHER_MAP.routes.reverseGeocoding,
+                { params }
+            )
             const data = response.data as GeocodingResponse[]
             if (data.length === 0) {
                 Alert.alert(
@@ -153,16 +180,25 @@ export function LocationInput(props: LocationInputProps) {
         setCitySearch({ city, latitude, longitude, timestamp })
     }
 
-    async function getLocationCoordinatesFromAddress(cityName: string): Promise<GeocodingResponse | undefined> {
+    async function getLocationCoordinatesFromAddress(
+        cityName: string
+    ): Promise<GeocodingResponse | undefined> {
         const params = { q: cityName }
 
         try {
-            const response = await openWeatherMap.get(OPEN_WEATHER_MAP.routes.geocoding, { params })
+            const response = await openWeatherMap.get(
+                OPEN_WEATHER_MAP.routes.geocoding,
+                { params }
+            )
             const data = response.data as GeocodingResponse[]
             if (data.length === 0) {
                 Alert.alert(
-                    translate("LocationInput_couldNotGetLocationCoordinatesFromAddress_title"),
-                    translate("LocationInput_couldNotGetLocationCoordinatesFromAddress_message")
+                    translate(
+                        "LocationInput_couldNotGetLocationCoordinatesFromAddress_title"
+                    ),
+                    translate(
+                        "LocationInput_couldNotGetLocationCoordinatesFromAddress_message"
+                    )
                 )
                 return
             }
@@ -170,8 +206,12 @@ export function LocationInput(props: LocationInputProps) {
             return data[0]
         } catch (error) {
             Alert.alert(
-                translate("LocationInput_errorGettingLocationCoordinatesFromAddress_title"),
-                translate("LocationInput_errorGettingLocationCoordinatesFromAddress_message")
+                translate(
+                    "LocationInput_errorGettingLocationCoordinatesFromAddress_title"
+                ),
+                translate(
+                    "LocationInput_errorGettingLocationCoordinatesFromAddress_message"
+                )
             )
             return
         }
