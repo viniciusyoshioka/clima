@@ -27,20 +27,20 @@
     },
     "devDependencies": {
         "@babel/core": "^7.20.0",
-        "@elementium/eslint-config": "file:../elementium/packages/eslint-config",
-        "@elementium/eslint-config-typescript": "file:../elementium/packages/eslint-config-typescript",
-        "@elementium/tsconfig": "file:../elementium/packages/tsconfig/",
         "@react-native/metro-config": "^0.72.11",
         "@sayem314/react-native-keep-awake": "^1.2.2",
+        "@stylistic/eslint-plugin": "^1.7.0",
         "@types/react": "^18.0.24",
         "@types/react-native-vector-icons": "^6.4.18",
-        "@typescript-eslint/eslint-plugin": "^6.11.0",
-        "@typescript-eslint/parser": "^6.11.0",
+        "@typescript-eslint/eslint-plugin": "^7.3.1",
+        "@typescript-eslint/parser": "^7.3.1",
+        "@vinicius1313/eslint-config": "^1.2.1",
+        "@vinicius1313/tsconfig": "^1.0.0",
         "babel-plugin-module-resolver": "^5.0.0",
-        "eslint": "^8.19.0",
+        "eslint": "^8.57.0",
         "metro-react-native-babel-preset": "0.76.8",
         "react-native-dotenv": "^3.4.9",
-        "typescript": "4.8.4"
+        "typescript": "^5.4.3"
     },
     "engines": {
         "node": ">=16"
