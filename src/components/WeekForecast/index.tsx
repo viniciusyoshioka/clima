@@ -20,7 +20,9 @@ export function WeekForecast() {
     const navigation = useNavigation<NavigationParamProps<"Home">>()
 
     const [citySearch] = useMMKVObject<SearchCity>(STORAGE_KEYS.SEARCH_CITY)
-    const [forecastWeather] = useMMKVObject<ForecastWeatherData>(STORAGE_KEYS.FORECAST_WEATHER)
+    const [forecastWeather] = useMMKVObject<ForecastWeatherData>(
+        STORAGE_KEYS.FORECAST_WEATHER
+    )
     const weekForecastWeather = useMemo(() => {
         if (!forecastWeather) return []
 
@@ -61,15 +63,42 @@ export function WeekForecast() {
             const meanDayForecast: ForecastWeatherData["list"][0] = {
                 dt: (previousForecast.dt + currentForecast.dt) / 2,
                 main: {
-                    feels_like: (previousForecast.main.feels_like + currentForecast.main.feels_like) / 2,
-                    grnd_level: (previousForecast.main.grnd_level + currentForecast.main.grnd_level) / 2,
-                    humidity: (previousForecast.main.humidity + currentForecast.main.humidity) / 2,
-                    pressure: (previousForecast.main.pressure + currentForecast.main.pressure) / 2,
-                    sea_level: (previousForecast.main.sea_level + currentForecast.main.sea_level) / 2,
-                    temp: (previousForecast.main.temp + currentForecast.main.temp) / 2,
-                    temp_kf: (previousForecast.main.temp_kf + currentForecast.main.temp_kf) / 2,
-                    temp_max: (previousForecast.main.temp_max + currentForecast.main.temp_max) / 2,
-                    temp_min: (previousForecast.main.temp_min + currentForecast.main.temp_min) / 2,
+                    feels_like: (
+                        previousForecast.main.feels_like
+                        + currentForecast.main.feels_like
+                    ) / 2,
+                    grnd_level: (
+                        previousForecast.main.grnd_level
+                        + currentForecast.main.grnd_level
+                    ) / 2,
+                    humidity: (
+                        previousForecast.main.humidity
+                        + currentForecast.main.humidity
+                    ) / 2,
+                    pressure: (
+                        previousForecast.main.pressure
+                        + currentForecast.main.pressure
+                    ) / 2,
+                    sea_level: (
+                        previousForecast.main.sea_level
+                        + currentForecast.main.sea_level
+                    ) / 2,
+                    temp: (
+                        previousForecast.main.temp
+                        + currentForecast.main.temp
+                    ) / 2,
+                    temp_kf: (
+                        previousForecast.main.temp_kf
+                        + currentForecast.main.temp_kf
+                    ) / 2,
+                    temp_max: (
+                        previousForecast.main.temp_max
+                        + currentForecast.main.temp_max
+                    ) / 2,
+                    temp_min: (
+                        previousForecast.main.temp_min
+                        + currentForecast.main.temp_min
+                    ) / 2,
                 },
                 clouds: {
                     all: (previousForecast.clouds.all + currentForecast.clouds.all) / 2,
@@ -79,7 +108,9 @@ export function WeekForecast() {
                     deg: (previousForecast.wind.deg + currentForecast.wind.deg) / 2,
                     gust: (previousForecast.wind.gust + currentForecast.wind.gust) / 2,
                 },
-                visibility: (previousForecast.visibility + currentForecast.visibility) / 2,
+                visibility: (
+                    (previousForecast.visibility + currentForecast.visibility) / 2
+                ),
                 pop: (previousForecast.pop + currentForecast.pop) / 2,
 
                 weather: currentForecast.weather,
@@ -106,7 +137,10 @@ export function WeekForecast() {
                 android_ripple={{ color: rippleColor, foreground: true }}
                 onPress={() => goToDetails(item.dt)}
             >
-                <Text variant={"titleSmall"} style={[styles.itemDayName, { color: colors.onSurface } ]}>
+                <Text
+                    variant={"titleSmall"}
+                    style={[styles.itemDayName, { color: colors.onSurface }]}
+                >
                     {formatForecastDate(item.dt)}
                 </Text>
 
@@ -117,13 +151,21 @@ export function WeekForecast() {
                         color={colors.onSurface}
                     />
 
-                    <Text variant={"titleSmall"} style={[styles.itemPrecipitationText, { color: colors.onSurface } ]}>
+                    <Text
+                        variant={"titleSmall"}
+                        style={[
+                            styles.itemPrecipitationText,
+                            { color: colors.onSurface },
+                        ]}
+                    >
                         {formatForecastPrecipitation(item.pop)}
                     </Text>
                 </View>
 
-                <Text variant={"titleSmall"} style={[ { color: colors.onSurface } ]}>
-                    {`${formatForecastTemperature(item.main.temp_min)} / ${formatForecastTemperature(item.main.temp_max)}`}
+                <Text variant={"titleSmall"} style={[{ color: colors.onSurface }]}>
+                    {formatForecastTemperature(item.main.temp_min)}
+                    {" / "}
+                    {formatForecastTemperature(item.main.temp_max)}
                 </Text>
             </Pressable>
         )
@@ -155,7 +197,10 @@ export function WeekForecast() {
 
     return (
         <View style={containerStyle}>
-            {(weekForecastWeather.length > 0) && weekForecastWeather.map((forecast, index) => (
+            {(weekForecastWeather.length > 0) && weekForecastWeather.map((
+                forecast,
+                index
+            ) => (
                 <>
                     <WeekForecastItem {...forecast} key={`${index}-item`} />
 
@@ -173,7 +218,11 @@ export function WeekForecast() {
             ))}
 
             {(weekForecastWeather.length === 0) && (
-                <Text variant={"titleSmall"} style={{ color: colors.onSurface }} key={"no-forecast-alert"}>
+                <Text
+                    variant={"titleSmall"}
+                    style={{ color: colors.onSurface }}
+                    key={"no-forecast-alert"}
+                >
                     {translate("WeekForecast_noWeekForecastAvailable")}
                 </Text>
             )}

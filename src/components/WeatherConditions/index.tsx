@@ -33,7 +33,9 @@ export function WeatherConditions(props: WeatherConditionsProps) {
 
     const disableNavigation = name === "Details"
     const [citySearch] = useMMKVObject<SearchCity>(STORAGE_KEYS.SEARCH_CITY)
-    const [currentWeather] = useMMKVObject<CurrentWeatherData>(STORAGE_KEYS.CURRENT_WEATHER)
+    const [currentWeather] = useMMKVObject<CurrentWeatherData>(
+        STORAGE_KEYS.CURRENT_WEATHER
+    )
 
     const weatherConditionsData: WeatherConditionsData | undefined = (() => {
         if (props.data) return props.data
@@ -73,9 +75,12 @@ export function WeatherConditions(props: WeatherConditionsProps) {
     }
 
     function getPrecipitationPercentage() {
-        if (!weatherConditionsData || !weatherConditionsData.precipitationPercentage) return
+        if (!weatherConditionsData || !weatherConditionsData.precipitationPercentage)
+            return
 
-        const percentagePrecipitation = weatherConditionsData.precipitationPercentage * 100
+        const percentagePrecipitation = (
+            weatherConditionsData.precipitationPercentage * 100
+        )
         const normalizedPrecipitation = percentagePrecipitation.toFixed(0)
         return `${normalizedPrecipitation}%`
     }
@@ -85,7 +90,10 @@ export function WeatherConditions(props: WeatherConditionsProps) {
         if (!weatherConditionsData) return
 
         if (props.data) {
-            navigation.navigate("Details", { type: "forecast", timestamp: weatherConditionsData.timestamp })
+            navigation.navigate("Details", {
+                type: "forecast",
+                timestamp: weatherConditionsData.timestamp,
+            })
         } else {
             navigation.navigate("Details", { type: "current" })
         }

@@ -26,7 +26,9 @@ export function TodayForecast(props: TodayForecastProps) {
 
     const disableNavigation = name === "Details"
     const [citySearch] = useMMKVObject<SearchCity>(STORAGE_KEYS.SEARCH_CITY)
-    const [forecastWeather] = useMMKVObject<ForecastWeatherData>(STORAGE_KEYS.FORECAST_WEATHER)
+    const [forecastWeather] = useMMKVObject<ForecastWeatherData>(
+        STORAGE_KEYS.FORECAST_WEATHER
+    )
     const todayForecastWeather = useMemo(() => {
         if (!forecastWeather) return []
 
@@ -163,11 +165,13 @@ export function TodayForecast(props: TodayForecastProps) {
             data={todayForecastWeather}
             renderItem={({ item }) => <HourForecastItem {...item} />}
             ItemSeparatorComponent={() => (
-                <Divider style={{
-                    height: "100%",
-                    width: 1,
-                    backgroundColor: colors.onSurfaceDisabled,
-                }} />
+                <Divider
+                    style={{
+                        height: "100%",
+                        width: 1,
+                        backgroundColor: colors.onSurfaceDisabled,
+                    }}
+                />
             )}
             ListEmptyComponent={() => (
                 <Text

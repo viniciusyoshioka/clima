@@ -3,7 +3,12 @@ import { useMMKVObject } from "react-native-mmkv"
 import { Text } from "react-native-paper"
 
 import { translate } from "@locale"
-import { CurrentWeatherData, STORAGE_KEYS, SearchCity, WeatherDescription } from "@services/storage"
+import {
+    CurrentWeatherData,
+    STORAGE_KEYS,
+    SearchCity,
+    WeatherDescription,
+} from "@services/storage"
 import { styles } from "./styles"
 
 
@@ -30,7 +35,9 @@ export function WeatherSummary(props: WeatherSummaryProps) {
     const showDateTime = props.showDateTime ?? true
 
     const [citySearch] = useMMKVObject<SearchCity>(STORAGE_KEYS.SEARCH_CITY)
-    const [currentWeather] = useMMKVObject<CurrentWeatherData>(STORAGE_KEYS.CURRENT_WEATHER)
+    const [currentWeather] = useMMKVObject<CurrentWeatherData>(
+        STORAGE_KEYS.CURRENT_WEATHER
+    )
 
     const weatherSummaryData: WeatherSummaryData | undefined = (() => {
         if (props.data) return props.data
@@ -111,16 +118,27 @@ export function WeatherSummary(props: WeatherSummaryProps) {
                     </Text>
                 </View>
 
-                <Image source={{
-                    uri: `https://openweathermap.org/img/wn/${weatherSummaryData.weather[0].icon}@4x.png`,
-                    width: 100,
-                    height: 100,
-                }} />
+                <Image
+                    source={{
+                        uri: "https://openweathermap.org/img/wn/"
+                        + weatherSummaryData.weather[0].icon
+                        + "@4x.png",
+                        width: 100,
+                        height: 100,
+                    }}
+                />
             </View>
 
             <View>
                 <Text variant={"titleMedium"}>
-                    {weatherSummaryData.city} {showDateTime && <>&bull; {getDateTime()}</>}
+                    {weatherSummaryData.city}
+                    {" "}
+                    {showDateTime && (
+                        <>
+                            &bull;
+                            {getDateTime()}
+                        </>
+                    )}
                 </Text>
 
                 <View style={styles.temperaturesContainer}>
@@ -129,7 +147,9 @@ export function WeatherSummary(props: WeatherSummaryProps) {
                     </Text>
 
                     <Text variant={"titleSmall"}>
-                        {translate("WeatherSummary_perceivedTemperature")} {getPerceivedTemperature()}
+                        {translate("WeatherSummary_perceivedTemperature")}
+                        {" "}
+                        {getPerceivedTemperature()}
                     </Text>
                 </View>
             </View>
