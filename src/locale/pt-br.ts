@@ -1,4 +1,4 @@
-/* eslint-disable camelcase */
+/* eslint-disable @stylistic/max-len */
 import { TranslationObjectType } from "./types"
 
 

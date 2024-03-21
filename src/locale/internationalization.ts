@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { I18n } from "i18n-js"
 
 import { getDeviceLanguageCode } from "./languageCode"
@@ -11,14 +10,14 @@ type LanguageCodeNormalization = {
 }
 
 const normalizedLanguageCode: LanguageCodeNormalization = {
-    "en": "en_us",
-    "en_us": "en_us",
-    "pt_br": "pt_br",
+    en: "en_us",
+    en_us: "en_us",
+    pt_br: "pt_br",
 }
 
 
 export const i18n = new I18n({
-    "pt_br": pt_br,
+    pt_br: pt_br,
 })
 
 
