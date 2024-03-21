@@ -2262,10 +2262,10 @@
   resolved "https://registry.yarnpkg.com/@ungap/structured-clone/-/structured-clone-1.2.0.tgz#756641adb587851b5ccb3e095daf27ae581c8406"
   integrity sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==
 
-"@vinicius1313/eslint-config@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@vinicius1313/eslint-config/-/eslint-config-1.2.1.tgz#944ab0931c0a156af0c52af93d577a7a0cdfe0ee"
-  integrity sha512-CMHce9oWdPUBpBFFDM78+ftx7GF62jXTSgGBxnOWjtOua1VPzTFZX69Uactg4cOwFhyNiRo9VGGefsNJhTZCwQ==
+"@vinicius1313/eslint-config@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@vinicius1313/eslint-config/-/eslint-config-1.2.2.tgz#83483f5dacafbd8c979bda8214f3476182eb2961"
+  integrity sha512-EZFyUZM38yzRXDxwKIJhgsJSltW0tqfnixERmtNaXP2yhuukpYoxfovj+FXQazcZSgmnaiktq9NNlFueubNY/g==
 
 "@vinicius1313/tsconfig@^1.0.0":
   version "1.0.0"
