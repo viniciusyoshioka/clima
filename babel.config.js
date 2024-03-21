@@ -18,10 +18,10 @@ module.exports = {
                 "@screens": "./src/screens",
                 "@services": "./src/services",
             },
-        } ],
+        }],
         ["module:react-native-dotenv", {
             allowUndefined: false,
-        } ],
+        }],
         "react-native-reanimated/plugin",
     ],
 }
