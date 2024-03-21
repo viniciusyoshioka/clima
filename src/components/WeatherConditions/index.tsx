@@ -55,7 +55,7 @@ export function WeatherConditions(props: WeatherConditionsProps) {
 
 
     function getSunRise() {
-        if (!weatherConditionsData) return
+        if (!weatherConditionsData) return ""
 
         const sunriseDate = new Date(weatherConditionsData.sunriseTimestamp * 1000)
         return sunriseDate.toLocaleTimeString("default", {
@@ -65,7 +65,7 @@ export function WeatherConditions(props: WeatherConditionsProps) {
     }
 
     function getSunSet() {
-        if (!weatherConditionsData) return
+        if (!weatherConditionsData) return ""
 
         const sunsetDate = new Date(weatherConditionsData.sunsetTimestamp * 1000)
         return sunsetDate.toLocaleTimeString("default", {
@@ -75,8 +75,10 @@ export function WeatherConditions(props: WeatherConditionsProps) {
     }
 
     function getPrecipitationPercentage() {
-        if (!weatherConditionsData || !weatherConditionsData.precipitationPercentage)
-            return
+        if (!weatherConditionsData)
+            return ""
+        if (weatherConditionsData.precipitationPercentage == undefined)
+            return ""
 
         const percentagePrecipitation = (
             weatherConditionsData.precipitationPercentage * 100
@@ -145,7 +147,7 @@ export function WeatherConditions(props: WeatherConditionsProps) {
                 />
             </View>
 
-            {!!weatherConditionsData.precipitationPercentage && (
+            {(weatherConditionsData.precipitationPercentage !== undefined) && (
                 <View style={styles.conditionLine}>
                     <ConditionCard
                         icon={"weather-pouring"}

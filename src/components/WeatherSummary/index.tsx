@@ -60,14 +60,14 @@ export function WeatherSummary(props: WeatherSummaryProps) {
 
     function getTemperature() {
         const temperature = weatherSummaryData?.currentTemperature
-        if (!temperature) return
+        if (temperature === undefined) return ""
 
         const temperatureString = temperature.toFixed(0)
         return `${temperatureString}°`
     }
 
     function getDateTime() {
-        if (!weatherSummaryData) return
+        if (!weatherSummaryData) return ""
 
         const lastSearchDate = new Date(weatherSummaryData.timestamp)
         const date = lastSearchDate.toLocaleDateString()
@@ -82,7 +82,7 @@ export function WeatherSummary(props: WeatherSummaryProps) {
     function getMinMaxTemperature() {
         const minTemperature = weatherSummaryData?.temperatureMin
         const maxTemperature = weatherSummaryData?.temperatureMax
-        if (!minTemperature || !maxTemperature) return
+        if (minTemperature === undefined || maxTemperature === undefined) return ""
 
         const minTemperatureString = minTemperature.toFixed()
         const maxTemperatureString = maxTemperature.toFixed()
@@ -91,7 +91,7 @@ export function WeatherSummary(props: WeatherSummaryProps) {
 
     function getPerceivedTemperature() {
         const perceivedTemperature = weatherSummaryData?.perceivedTemperature
-        if (!perceivedTemperature) return
+        if (perceivedTemperature === undefined) return ""
 
         const perceivedTemperatureString = perceivedTemperature.toFixed()
         return `${perceivedTemperatureString}°`

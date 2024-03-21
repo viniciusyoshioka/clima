@@ -56,7 +56,7 @@ export function TodayForecast(props: TodayForecastProps) {
 
 
     function getFirstTimestamp() {
-        if (props.baseTimestmap) {
+        if (props.baseTimestmap !== undefined) {
             const baseDate = new Date(props.baseTimestmap * 1000)
             baseDate.setHours(0, 0, 0, 0)
             return baseDate.getTime()
@@ -68,7 +68,7 @@ export function TodayForecast(props: TodayForecastProps) {
     }
 
     function getLastTimestamp() {
-        if (props.baseTimestmap) {
+        if (props.baseTimestmap !== undefined) {
             const baseDate = new Date(props.baseTimestmap * 1000)
             baseDate.setDate(baseDate.getDate() + 1)
             baseDate.setHours(0, 0, 0, 0)
@@ -82,7 +82,8 @@ export function TodayForecast(props: TodayForecastProps) {
     }
 
     function getBaseTimestamp() {
-        if (props.baseTimestmap) return props.baseTimestmap * 1000
+        if (props.baseTimestmap !== undefined)
+            return props.baseTimestmap * 1000
         return new Date().getTime()
     }
 
