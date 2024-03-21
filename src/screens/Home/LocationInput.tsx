@@ -1,4 +1,3 @@
-import { Color, Prism } from "@elementium/color"
 import { useRef, useState } from "react"
 import { Alert, Pressable, PressableAndroidRippleConfig, StyleProp, StyleSheet, TextInput, TextStyle, View, ViewStyle } from "react-native"
 import { GeoPosition } from "react-native-geolocation-service"
@@ -46,9 +45,7 @@ export function LocationInput(props: LocationInputProps) {
     }
 
 
-    const buttonBackgroundColor = new Color(colors.surfaceVariant)
-    const buttonOverlay = new Color("white").setA(0.2)
-    const buttonRipple = Prism.addColors(buttonBackgroundColor, buttonOverlay).toRgba()
+    const buttonRipple = "rgba(255, 255, 255, 0.2)"
     const ripple: PressableAndroidRippleConfig = { color: buttonRipple, radius: 28 }
 
 

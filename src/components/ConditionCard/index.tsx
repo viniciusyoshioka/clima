@@ -2,7 +2,6 @@ import { Pressable, PressableProps, StyleSheet, View, ViewStyle } from "react-na
 import { Divider, Text, useTheme } from "react-native-paper"
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 
-import { Color, Prism } from "@elementium/color"
 import { styles } from "./styles"
 
 
@@ -20,14 +19,10 @@ export function ConditionCard(props: ConditionCardProps) {
 
 
     const style = StyleSheet.flatten(props.style)
-
-    const backgroundColor = new Color(colors.surface)
-    const overlayColor = new Color("white").setA(0.3)
-    const rippleColor = Prism.addColors(backgroundColor, overlayColor).toRgba()
-
+    const rippleColor = "rgba(255, 255, 255, 0.2)"
     const cardStyle: ViewStyle = {
         ...styles.container,
-        backgroundColor: backgroundColor.toRgba(),
+        backgroundColor: colors.surface,
         ...style,
     }
 

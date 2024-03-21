@@ -1,4 +1,3 @@
-import { Color, Prism } from "@elementium/color"
 import { useNavigation, useRoute } from "@react-navigation/native"
 import { useMemo } from "react"
 import { FlatList, Image, Pressable, View, ViewStyle } from "react-native"
@@ -92,9 +91,7 @@ export function TodayForecast(props: TodayForecastProps) {
     }
 
     function HourForecastItem(data: ForecastWeatherData["list"][0]) {
-        const backgroundColor = new Color(colors.surface)
-        const overlayColor = new Color("white").setA(0.3)
-        const rippleColor = Prism.addColors(backgroundColor, overlayColor).toRgba()
+        const rippleColor = "rgba(255, 255, 255, 0.2)"
 
         return (
             <Pressable

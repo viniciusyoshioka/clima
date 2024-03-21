@@ -6,7 +6,6 @@ import { useMMKVObject } from "react-native-mmkv"
 import { Divider, Text, useTheme } from "react-native-paper"
 import MaterialCommunityIcon from "react-native-vector-icons/MaterialCommunityIcons"
 
-import { Color, Prism } from "@elementium/color"
 import { translate } from "@locale"
 import { NavigationParamProps } from "@router"
 import { ForecastWeatherData, STORAGE_KEYS, SearchCity } from "@services/storage"
@@ -99,9 +98,7 @@ export function WeekForecast() {
     }
 
     function WeekForecastItem(item: ForecastWeatherData["list"][0]) {
-        const backgroundColor = new Color(colors.surface)
-        const overlayColor = new Color("white").setA(0.3)
-        const rippleColor = Prism.addColors(backgroundColor, overlayColor).toRgba()
+        const rippleColor = "rgba(255, 255, 255, 0.2)"
 
         return (
             <Pressable
