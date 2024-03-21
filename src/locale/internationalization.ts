@@ -6,18 +6,18 @@ import { TranslationKeyType } from "./types"
 
 
 type LanguageCodeNormalization = {
-    [key in string]: string
+  [key in string]: string
 }
 
 const normalizedLanguageCode: LanguageCodeNormalization = {
-    en: "en_us",
-    en_us: "en_us",
-    pt_br: "pt_br",
+  en: "en_us",
+  en_us: "en_us",
+  pt_br: "pt_br",
 }
 
 
 export const i18n = new I18n({
-    pt_br: pt_br,
+  pt_br: pt_br,
 })
 
 
@@ -27,9 +27,9 @@ const normalizedDeviceLangauge = normalizedLanguageCode[deviceLanguage]
 const allSupportedLanguages = Object.keys(i18n.translations)
 const isLanguageSupported = allSupportedLanguages.includes(normalizedDeviceLangauge)
 if (isLanguageSupported) {
-    i18n.locale = normalizedDeviceLangauge
+  i18n.locale = normalizedDeviceLangauge
 } else {
-    i18n.defaultLocale = "en_us"
+  i18n.defaultLocale = "en_us"
 }
 
 

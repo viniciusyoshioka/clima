@@ -9,18 +9,18 @@ import { Router } from "@router"
 export function App() {
 
 
-    useKeepAwakeOnDev()
+  useKeepAwakeOnDev()
 
 
-    const colorScheme = useColorScheme() ?? "light"
-    const isDark = colorScheme === "dark"
+  const colorScheme = useColorScheme() ?? "light"
+  const isDark = colorScheme === "dark"
 
 
-    return (
-        <KeyboardProvider statusBarTranslucent={true}>
-            <PaperProvider theme={isDark ? MD3DarkTheme : MD3LightTheme}>
-                <Router />
-            </PaperProvider>
-        </KeyboardProvider>
-    )
+  return (
+    <KeyboardProvider statusBarTranslucent={true}>
+      <PaperProvider theme={isDark ? MD3DarkTheme : MD3LightTheme}>
+        <Router />
+      </PaperProvider>
+    </KeyboardProvider>
+  )
 }

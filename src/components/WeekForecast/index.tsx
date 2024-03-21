@@ -15,217 +15,217 @@ import { styles } from "./styles"
 export function WeekForecast() {
 
 
-    const { colors } = useTheme()
+  const { colors } = useTheme()
 
-    const navigation = useNavigation<NavigationParamProps<"Home">>()
+  const navigation = useNavigation<NavigationParamProps<"Home">>()
 
-    const [citySearch] = useMMKVObject<SearchCity>(STORAGE_KEYS.SEARCH_CITY)
-    const [forecastWeather] = useMMKVObject<ForecastWeatherData>(
-        STORAGE_KEYS.FORECAST_WEATHER
-    )
-    const weekForecastWeather = useMemo(() => {
-        if (!forecastWeather) return []
+  const [citySearch] = useMMKVObject<SearchCity>(STORAGE_KEYS.SEARCH_CITY)
+  const [forecastWeather] = useMMKVObject<ForecastWeatherData>(
+    STORAGE_KEYS.FORECAST_WEATHER
+  )
+  const weekForecastWeather = useMemo(() => {
+    if (!forecastWeather) return []
 
-        const tomorrow = new Date()
-        tomorrow.setDate(tomorrow.getDate() + 1)
-        tomorrow.setHours(0, 0, 0, 0)
-        const tomorrowTimestamp = tomorrow.getTime()
+    const tomorrow = new Date()
+    tomorrow.setDate(tomorrow.getDate() + 1)
+    tomorrow.setHours(0, 0, 0, 0)
+    const tomorrowTimestamp = tomorrow.getTime()
 
-        const filteredForecastWeather = forecastWeather.list.filter(forecast => {
-            const forecastTimestamp = forecast.dt * 1000
+    const filteredForecastWeather = forecastWeather.list.filter(forecast => {
+      const forecastTimestamp = forecast.dt * 1000
 
-            if (forecastTimestamp >= tomorrowTimestamp) {
-                return true
-            }
-            return false
-        })
+      if (forecastTimestamp >= tomorrowTimestamp) {
+        return true
+      }
+      return false
+    })
 
-        const weekForecastToReturn: ForecastWeatherData["list"] = []
-        for (let i = 0; i < filteredForecastWeather.length; i++) {
-            if (weekForecastToReturn.length === 0) {
-                weekForecastToReturn.push(filteredForecastWeather[i])
-                continue
-            }
+    const weekForecastToReturn: ForecastWeatherData["list"] = []
+    for (let i = 0; i < filteredForecastWeather.length; i++) {
+      if (weekForecastToReturn.length === 0) {
+        weekForecastToReturn.push(filteredForecastWeather[i])
+        continue
+      }
 
-            const previousForecast = weekForecastToReturn[weekForecastToReturn.length - 1]
-            const currentForecast = filteredForecastWeather[i]
+      const previousForecast = weekForecastToReturn[weekForecastToReturn.length - 1]
+      const currentForecast = filteredForecastWeather[i]
 
-            const previousForecastDate = new Date(previousForecast.dt * 1000)
-            const previousForecastDay = previousForecastDate.getDate()
-            const currentForecastDate = new Date(currentForecast.dt * 1000)
-            const currentForecastDay = currentForecastDate.getDate()
+      const previousForecastDate = new Date(previousForecast.dt * 1000)
+      const previousForecastDay = previousForecastDate.getDate()
+      const currentForecastDate = new Date(currentForecast.dt * 1000)
+      const currentForecastDay = currentForecastDate.getDate()
 
-            if (previousForecastDay !== currentForecastDay) {
-                weekForecastToReturn.push(currentForecast)
-                continue
-            }
+      if (previousForecastDay !== currentForecastDay) {
+        weekForecastToReturn.push(currentForecast)
+        continue
+      }
 
-            const meanDayForecast: ForecastWeatherData["list"][0] = {
-                dt: (previousForecast.dt + currentForecast.dt) / 2,
-                main: {
-                    feels_like: (
-                        previousForecast.main.feels_like
-                        + currentForecast.main.feels_like
-                    ) / 2,
-                    grnd_level: (
-                        previousForecast.main.grnd_level
-                        + currentForecast.main.grnd_level
-                    ) / 2,
-                    humidity: (
-                        previousForecast.main.humidity
-                        + currentForecast.main.humidity
-                    ) / 2,
-                    pressure: (
-                        previousForecast.main.pressure
-                        + currentForecast.main.pressure
-                    ) / 2,
-                    sea_level: (
-                        previousForecast.main.sea_level
-                        + currentForecast.main.sea_level
-                    ) / 2,
-                    temp: (
-                        previousForecast.main.temp
-                        + currentForecast.main.temp
-                    ) / 2,
-                    temp_kf: (
-                        previousForecast.main.temp_kf
-                        + currentForecast.main.temp_kf
-                    ) / 2,
-                    temp_max: (
-                        previousForecast.main.temp_max
-                        + currentForecast.main.temp_max
-                    ) / 2,
-                    temp_min: (
-                        previousForecast.main.temp_min
-                        + currentForecast.main.temp_min
-                    ) / 2,
-                },
-                clouds: {
-                    all: (previousForecast.clouds.all + currentForecast.clouds.all) / 2,
-                },
-                wind: {
-                    speed: (previousForecast.wind.speed + currentForecast.wind.speed) / 2,
-                    deg: (previousForecast.wind.deg + currentForecast.wind.deg) / 2,
-                    gust: (previousForecast.wind.gust + currentForecast.wind.gust) / 2,
-                },
-                visibility: (
-                    (previousForecast.visibility + currentForecast.visibility) / 2
-                ),
-                pop: (previousForecast.pop + currentForecast.pop) / 2,
+      const meanDayForecast: ForecastWeatherData["list"][0] = {
+        dt: (previousForecast.dt + currentForecast.dt) / 2,
+        main: {
+          feels_like: (
+            previousForecast.main.feels_like
+            + currentForecast.main.feels_like
+          ) / 2,
+          grnd_level: (
+            previousForecast.main.grnd_level
+            + currentForecast.main.grnd_level
+          ) / 2,
+          humidity: (
+            previousForecast.main.humidity
+            + currentForecast.main.humidity
+          ) / 2,
+          pressure: (
+            previousForecast.main.pressure
+            + currentForecast.main.pressure
+          ) / 2,
+          sea_level: (
+            previousForecast.main.sea_level
+            + currentForecast.main.sea_level
+          ) / 2,
+          temp: (
+            previousForecast.main.temp
+            + currentForecast.main.temp
+          ) / 2,
+          temp_kf: (
+            previousForecast.main.temp_kf
+            + currentForecast.main.temp_kf
+          ) / 2,
+          temp_max: (
+            previousForecast.main.temp_max
+            + currentForecast.main.temp_max
+          ) / 2,
+          temp_min: (
+            previousForecast.main.temp_min
+            + currentForecast.main.temp_min
+          ) / 2,
+        },
+        clouds: {
+          all: (previousForecast.clouds.all + currentForecast.clouds.all) / 2,
+        },
+        wind: {
+          speed: (previousForecast.wind.speed + currentForecast.wind.speed) / 2,
+          deg: (previousForecast.wind.deg + currentForecast.wind.deg) / 2,
+          gust: (previousForecast.wind.gust + currentForecast.wind.gust) / 2,
+        },
+        visibility: (
+          (previousForecast.visibility + currentForecast.visibility) / 2
+        ),
+        pop: (previousForecast.pop + currentForecast.pop) / 2,
 
-                weather: currentForecast.weather,
-                sys: currentForecast.sys,
-                dt_txt: currentForecast.dt_txt,
-            }
+        weather: currentForecast.weather,
+        sys: currentForecast.sys,
+        dt_txt: currentForecast.dt_txt,
+      }
 
-            weekForecastToReturn[weekForecastToReturn.length - 1] = meanDayForecast
-        }
-        return weekForecastToReturn
-    }, [forecastWeather, citySearch?.timestamp])
-
-
-    function goToDetails(timestamp: number) {
-        navigation.navigate("Details", { type: "forecast", timestamp })
+      weekForecastToReturn[weekForecastToReturn.length - 1] = meanDayForecast
     }
-
-    function WeekForecastItem(item: ForecastWeatherData["list"][0]) {
-        const rippleColor = "rgba(255, 255, 255, 0.2)"
-
-        return (
-            <Pressable
-                style={styles.itemContainer}
-                android_ripple={{ color: rippleColor, foreground: true }}
-                onPress={() => goToDetails(item.dt)}
-            >
-                <Text
-                    variant={"titleSmall"}
-                    style={[styles.itemDayName, { color: colors.onSurface }]}
-                >
-                    {formatForecastDate(item.dt)}
-                </Text>
-
-                <View style={styles.itemPrecipitationContainer}>
-                    <MaterialCommunityIcon
-                        name={"weather-pouring"}
-                        size={20}
-                        color={colors.onSurface}
-                    />
-
-                    <Text
-                        variant={"titleSmall"}
-                        style={[
-                            styles.itemPrecipitationText,
-                            { color: colors.onSurface },
-                        ]}
-                    >
-                        {formatForecastPrecipitation(item.pop)}
-                    </Text>
-                </View>
-
-                <Text variant={"titleSmall"} style={[{ color: colors.onSurface }]}>
-                    {formatForecastTemperature(item.main.temp_min)}
-                    {" / "}
-                    {formatForecastTemperature(item.main.temp_max)}
-                </Text>
-            </Pressable>
-        )
-    }
-
-    function formatForecastDate(timestamp: number) {
-        const forecastDate = new Date(timestamp * 1000)
-        const weekday = forecastDate.toLocaleDateString(undefined, { weekday: "long" })
-        return weekday.split(",")[0]
-    }
-
-    function formatForecastPrecipitation(precipitation: number) {
-        const percentagePrecipitation = precipitation * 100
-        const normalizedPrecipitation = percentagePrecipitation.toFixed(0)
-        return `${normalizedPrecipitation}%`
-    }
-
-    function formatForecastTemperature(temperature: number) {
-        const stringTemperature = temperature.toFixed(0)
-        return `${stringTemperature}°`
-    }
+    return weekForecastToReturn
+  }, [forecastWeather, citySearch?.timestamp])
 
 
-    const containerStyle: ViewStyle = {
-        ...styles.container,
-        backgroundColor: colors.surface,
-    }
+  function goToDetails(timestamp: number) {
+    navigation.navigate("Details", { type: "forecast", timestamp })
+  }
 
+  function WeekForecastItem(item: ForecastWeatherData["list"][0]) {
+    const rippleColor = "rgba(255, 255, 255, 0.2)"
 
     return (
-        <View style={containerStyle}>
-            {(weekForecastWeather.length > 0) && weekForecastWeather.map((
-                forecast,
-                index
-            ) => (
-                <>
-                    <WeekForecastItem {...forecast} key={`${index}-item`} />
+      <Pressable
+        style={styles.itemContainer}
+        android_ripple={{ color: rippleColor, foreground: true }}
+        onPress={() => goToDetails(item.dt)}
+      >
+        <Text
+          variant={"titleSmall"}
+          style={[styles.itemDayName, { color: colors.onSurface }]}
+        >
+          {formatForecastDate(item.dt)}
+        </Text>
 
-                    {(index < (weekForecastWeather.length - 1)) && (
-                        <Divider
-                            style={{
-                                width: "100%",
-                                height: 1,
-                                backgroundColor: colors.onSurfaceDisabled,
-                            }}
-                            key={`${index}-divider`}
-                        />
-                    )}
-                </>
-            ))}
+        <View style={styles.itemPrecipitationContainer}>
+          <MaterialCommunityIcon
+            name={"weather-pouring"}
+            size={20}
+            color={colors.onSurface}
+          />
 
-            {(weekForecastWeather.length === 0) && (
-                <Text
-                    variant={"titleSmall"}
-                    style={{ color: colors.onSurface }}
-                    key={"no-forecast-alert"}
-                >
-                    {translate("WeekForecast_noWeekForecastAvailable")}
-                </Text>
-            )}
+          <Text
+            variant={"titleSmall"}
+            style={[
+              styles.itemPrecipitationText,
+              { color: colors.onSurface },
+            ]}
+          >
+            {formatForecastPrecipitation(item.pop)}
+          </Text>
         </View>
+
+        <Text variant={"titleSmall"} style={[{ color: colors.onSurface }]}>
+          {formatForecastTemperature(item.main.temp_min)}
+          {" / "}
+          {formatForecastTemperature(item.main.temp_max)}
+        </Text>
+      </Pressable>
     )
+  }
+
+  function formatForecastDate(timestamp: number) {
+    const forecastDate = new Date(timestamp * 1000)
+    const weekday = forecastDate.toLocaleDateString(undefined, { weekday: "long" })
+    return weekday.split(",")[0]
+  }
+
+  function formatForecastPrecipitation(precipitation: number) {
+    const percentagePrecipitation = precipitation * 100
+    const normalizedPrecipitation = percentagePrecipitation.toFixed(0)
+    return `${normalizedPrecipitation}%`
+  }
+
+  function formatForecastTemperature(temperature: number) {
+    const stringTemperature = temperature.toFixed(0)
+    return `${stringTemperature}°`
+  }
+
+
+  const containerStyle: ViewStyle = {
+    ...styles.container,
+    backgroundColor: colors.surface,
+  }
+
+
+  return (
+    <View style={containerStyle}>
+      {(weekForecastWeather.length > 0) && weekForecastWeather.map((
+        forecast,
+        index
+      ) => (
+        <>
+          <WeekForecastItem {...forecast} key={`${index}-item`} />
+
+          {(index < (weekForecastWeather.length - 1)) && (
+            <Divider
+              style={{
+                width: "100%",
+                height: 1,
+                backgroundColor: colors.onSurfaceDisabled,
+              }}
+              key={`${index}-divider`}
+            />
+          )}
+        </>
+      ))}
+
+      {(weekForecastWeather.length === 0) && (
+        <Text
+          variant={"titleSmall"}
+          style={{ color: colors.onSurface }}
+          key={"no-forecast-alert"}
+        >
+          {translate("WeekForecast_noWeekForecastAvailable")}
+        </Text>
+      )}
+    </View>
+  )
 }

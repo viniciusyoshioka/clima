@@ -1,26 +1,26 @@
 {
-    "extends": "@vinicius1313/tsconfig/tsconfig.json",
-    "compilerOptions": {
-        "baseUrl": ".",
-        "paths": {
-            "@api": ["./src/api"],
-            "@components": ["./src/components"],
-            "@hooks": ["./src/hooks"],
-            "@locale": ["./src/locale"],
-            "@router": ["./src/router"],
-            "@screens/*": ["./src/screens/*"],
-            "@services/*": ["./src/services/*"],
-        },
-        "typeRoots": ["./src/types"],
+  "extends": "@vinicius1313/tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@api": ["./src/api"],
+      "@components": ["./src/components"],
+      "@hooks": ["./src/hooks"],
+      "@locale": ["./src/locale"],
+      "@router": ["./src/router"],
+      "@screens/*": ["./src/screens/*"],
+      "@services/*": ["./src/services/*"],
     },
-    "include": [
-        "src",
-        ".eslintrc.js",
-        "babel.config.js",
-        "index.js",
-        "metro.config.js",
-    ],
-    "exclude": [
-        "node_modules",
-    ],
+    "typeRoots": ["./src/types"],
+  },
+  "include": [
+    "src",
+    ".eslintrc.js",
+    "babel.config.js",
+    "index.js",
+    "metro.config.js",
+  ],
+  "exclude": [
+    "node_modules",
+  ],
 }

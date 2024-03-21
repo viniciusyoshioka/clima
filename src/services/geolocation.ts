@@ -1,16 +1,16 @@
 import GeolocationService, {
-    GeoOptions,
-    GeoPosition,
+  GeoOptions,
+  GeoPosition,
 } from "react-native-geolocation-service"
 
 
 async function getCurrentPosition(options?: GeoOptions): Promise<GeoPosition> {
-    return await new Promise((resolve, reject) => {
-        GeolocationService.getCurrentPosition(resolve, reject, options)
-    })
+  return await new Promise((resolve, reject) => {
+    GeolocationService.getCurrentPosition(resolve, reject, options)
+  })
 }
 
 
 export const Geolocation = {
-    getCurrentPosition,
+  getCurrentPosition,
 }
