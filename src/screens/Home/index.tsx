@@ -113,7 +113,7 @@ export function Home() {
         const listener = mmkv.addOnValueChangedListener(async key => {
             if (key === STORAGE_KEYS.SEARCH_CITY) {
                 const stringifiedCitySearch = mmkv.getString(STORAGE_KEYS.SEARCH_CITY)
-                if (!stringifiedCitySearch) return
+                if (stringifiedCitySearch === undefined) return
 
                 const objectCitySearch = JSON.parse(stringifiedCitySearch) as SearchCity
                 await getWeatherData(objectCitySearch)

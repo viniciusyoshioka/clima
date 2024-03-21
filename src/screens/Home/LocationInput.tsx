@@ -113,7 +113,7 @@ export function LocationInput(props: LocationInputProps) {
                 translate("LocationInput_noLocationPermission_title"),
                 translate("LocationInput_noLocationPermission_message")
             )
-            return
+            return undefined
         }
 
         try {
@@ -124,7 +124,7 @@ export function LocationInput(props: LocationInputProps) {
                 translate("LocationInput_errorGettingLocation_message")
             )
         }
-        return
+        return undefined
     }
 
     async function getLocationAddressFromCoordinates(
@@ -146,7 +146,7 @@ export function LocationInput(props: LocationInputProps) {
                     translate("LocationInput_couldNotGetAddressFromCoordinates_title"),
                     translate("LocationInput_couldNotGetAddressFromCoordinates_message")
                 )
-                return
+                return undefined
             }
 
             return data[0]
@@ -155,7 +155,7 @@ export function LocationInput(props: LocationInputProps) {
                 translate("LocationInput_errorGettingAddressFromCoordinates_title"),
                 translate("LocationInput_errorGettingAddressFromCoordinates_message")
             )
-            return
+            return undefined
         }
     }
 
@@ -200,7 +200,7 @@ export function LocationInput(props: LocationInputProps) {
                         "LocationInput_couldNotGetLocationCoordinatesFromAddress_message"
                     )
                 )
-                return
+                return undefined
             }
 
             return data[0]
@@ -213,7 +213,7 @@ export function LocationInput(props: LocationInputProps) {
                     "LocationInput_errorGettingLocationCoordinatesFromAddress_message"
                 )
             )
-            return
+            return undefined
         }
     }
 

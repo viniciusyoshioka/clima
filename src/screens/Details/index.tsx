@@ -111,18 +111,18 @@ export function Details() {
 
 
     function formatDate() {
-        if (params.timestamp) {
+        if (params.timestamp !== undefined) {
             const date = new Date(params.timestamp * 1000)
             return date.toLocaleDateString()
         }
 
-        if (!citySearch) return
+        if (!citySearch) return ""
         const date = new Date(citySearch.timestamp)
         return date.toLocaleDateString()
     }
 
     function formatTime() {
-        if (params.timestamp) {
+        if (params.timestamp !== undefined) {
             const date = new Date(params.timestamp * 1000)
             return date.toLocaleTimeString("default", {
                 hour: "2-digit",
@@ -130,7 +130,7 @@ export function Details() {
             })
         }
 
-        if (!citySearch) return
+        if (!citySearch) return ""
         const date = new Date(citySearch.timestamp)
         return date.toLocaleTimeString("default", {
             hour: "2-digit",
@@ -140,7 +140,7 @@ export function Details() {
 
     const showTodayForecast = (() => {
         const isForecastType = params.type === "forecast"
-        const isToday = params.timestamp
+        const isToday = (params.timestamp !== undefined)
             ? new Date(params.timestamp * 1000).getDate() === new Date().getDate()
             : false
 
