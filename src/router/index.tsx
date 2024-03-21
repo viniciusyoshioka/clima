@@ -1,5 +1,8 @@
 import { NavigationContainer } from "@react-navigation/native"
-import { NativeStackNavigationOptions, createNativeStackNavigator } from "@react-navigation/native-stack"
+import {
+    NativeStackNavigationOptions,
+    createNativeStackNavigator,
+} from "@react-navigation/native-stack"
 import { useColorScheme } from "react-native"
 
 import { Details } from "@screens/Details"
@@ -33,7 +36,10 @@ export function Router() {
 
     return (
         <NavigationContainer>
-            <NativeStack.Navigator initialRouteName={"Home"} screenOptions={nativeStackNavigationOptions}>
+            <NativeStack.Navigator
+                initialRouteName={"Home"}
+                screenOptions={nativeStackNavigationOptions}
+            >
                 <NativeStack.Screen name={"Home"} component={Home} />
                 <NativeStack.Screen name={"Details"} component={Details} />
             </NativeStack.Navigator>
