@@ -15,10 +15,6 @@
   },
   "include": [
     "src",
-    ".eslintrc.js",
-    "babel.config.js",
-    "index.js",
-    "metro.config.js",
   ],
   "exclude": [
     "node_modules",
